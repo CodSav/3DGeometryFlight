@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace _3DGame
+namespace GreenChicken
 {
     public abstract class CollidableModel
     {

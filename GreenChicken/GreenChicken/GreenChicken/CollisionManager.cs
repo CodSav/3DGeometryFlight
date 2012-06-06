@@ -1,7 +1,7 @@
 using System.Collections;
 using Microsoft.Xna.Framework;
 
-namespace _3DGame
+namespace GreenChicken
 {
     public struct Triangle
     {
