@@ -82,6 +82,21 @@ namespace _3DGame
             return Contains(ref sphere, ref triangle.V0, ref triangle.V1, ref triangle.V2);
         }
 
+        public static ContainmentType Contains(ref BoundingSphere s1, ref BoundingSphere s2)
+        {
+            return s1.Contains(s2);
+        }
+
+        public static ContainmentType Contains(ref BoundingSphere s1, ref BoundingBox b1)
+        {
+            return s1.Contains(b1);
+        }
+
+        public static ContainmentType Contains(ref BoundingBox b1, ref BoundingSphere s1)
+        {
+            return b1.Contains(s1);
+        }
+
         private static Vector3 NearestPointOnTriangle(ref Vector3 p, ref Vector3 v0, ref Vector3 v1, ref Vector3 v2)
         {
             float distance0 = Vector3.DistanceSquared(v0, p);

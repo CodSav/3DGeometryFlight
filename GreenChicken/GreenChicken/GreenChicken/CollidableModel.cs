@@ -7,17 +7,18 @@ namespace _3DGame
 {
     public abstract class CollidableModel
     {
+        public ArrayList CollidesWith = new ArrayList();
+        public bool IsCollidable;
+        protected Matrix World = Matrix.Identity;
         public Model Model { get; protected set; }
         public Vector3 Position { get; set; }
+
         public BoundingSphere BoundingSphere
         {
             get { return GetBoundingSphere(); }
         }
-        protected Matrix World = Matrix.Identity;
-        public ArrayList CollidesWith = new ArrayList();
-        public bool IsCollidable;
 
-        private BoundingSphere GetBoundingSphere()
+        public BoundingSphere GetBoundingSphere()
         {
             var boneTransforms = new Matrix[Model.Bones.Count];
             Model.CopyAbsoluteBoneTransformsTo(boneTransforms);
@@ -45,7 +46,7 @@ namespace _3DGame
 
         public virtual Matrix GetWorld()
         {
-            return World  *Matrix.CreateTranslation(Position);
+            return World*Matrix.CreateTranslation(Position);
         }
     }
 }
