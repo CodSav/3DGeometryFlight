@@ -7,15 +7,15 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\bwilson\Documents\Flight\trunk\GreenChicken\GreenChicken\GreenChickenContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\bwilson\Documents\Flight\trunk\GreenChicken\GreenChicken\GreenChicken\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\bwilson\Documents\Flight\trunk\GreenChicken\GreenChicken\GreenChickenContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\bwilson\Documents\Flight\trunk\GreenChicken\GreenChicken\GreenChicken\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\zdurtschi\Documents\Visual Studio 2010\Projects\GeometryFlight\3DGeometryFlight\GreenChicken\GreenChicken\GreenChickenContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\zdurtschi\Documents\Visual Studio 2010\Projects\GeometryFlight\3DGeometryFlight\GreenChicken\GreenChicken\GreenChicken\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\zdurtschi\Documents\Visual Studio 2010\Projects\GeometryFlight\3DGeometryFlight\GreenChicken\GreenChicken\GreenChickenContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\zdurtschi\Documents\Visual Studio 2010\Projects\GeometryFlight\3DGeometryFlight\GreenChicken\GreenChicken\GreenChicken\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2012-05-14T09:23:18.4249196-06:00</Value>
+        <Value>2012-01-29T21:56:51.5507668-07:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
