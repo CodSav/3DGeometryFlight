@@ -1,9 +1,3 @@
-C:\Users\bwilson\Documents\Flight\trunk\GreenChicken\GreenChicken\GreenChicken\bin\x86\Debug\GreenChicken.exe
-C:\Users\bwilson\Documents\Flight\trunk\GreenChicken\GreenChicken\GreenChicken\bin\x86\Debug\GreenChicken.pdb
-C:\Users\bwilson\Documents\Flight\trunk\GreenChicken\GreenChicken\GreenChicken\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\bwilson\Documents\Flight\trunk\GreenChicken\GreenChicken\GreenChicken\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-C:\Users\bwilson\Documents\Flight\trunk\GreenChicken\GreenChicken\GreenChicken\obj\x86\Debug\GreenChicken.exe
-C:\Users\bwilson\Documents\Flight\trunk\GreenChicken\GreenChicken\GreenChicken\obj\x86\Debug\GreenChicken.pdb
 C:\Users\zdurtschi\Documents\Visual Studio 2010\Projects\GeometryFlight\3DGeometryFlight\GreenChicken\GreenChicken\GreenChicken\bin\x86\Debug\GreenChicken.exe
 C:\Users\zdurtschi\Documents\Visual Studio 2010\Projects\GeometryFlight\3DGeometryFlight\GreenChicken\GreenChicken\GreenChicken\bin\x86\Debug\GreenChicken.pdb
 C:\Users\zdurtschi\Documents\Visual Studio 2010\Projects\GeometryFlight\3DGeometryFlight\GreenChicken\GreenChicken\GreenChicken\obj\x86\Debug\ResolveAssemblyReference.cache

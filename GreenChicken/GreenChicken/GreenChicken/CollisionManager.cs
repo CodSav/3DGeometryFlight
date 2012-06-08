@@ -20,7 +20,7 @@ namespace GreenChicken
     public class CollisionManager : GameComponent
     {
         private static CollisionManager cm;
-        private ArrayList collidables = new ArrayList();
+        private readonly ArrayList collidables = new ArrayList();
 
         private CollisionManager(Game game)
             : base(game)
@@ -34,12 +34,12 @@ namespace GreenChicken
 
         public override void Update(GameTime gameTime)
         {
-            foreach(CollidableModel c in collidables)
+            foreach (Basic c in collidables)
             {
                 var collide = new ArrayList();
-                foreach (CollidableModel c2 in collidables)
+                foreach (Basic c2 in collidables)
                 {
-                    if(c == c2)
+                    if (c == c2 || !c.IsCollidable || !c2.IsCollidable)
                         continue;
                     if (c.BoundingSphere.Intersects(c2.BoundingSphere))
                     {
@@ -51,12 +51,12 @@ namespace GreenChicken
             base.Update(gameTime);
         }
 
-        public void AddToCollidables(CollidableModel c)
+        public void AddToCollidables(Basic c)
         {
             collidables.Add(c);
         }
 
-        public void RemoveFromCollidables(CollidableModel c)
+        public void RemoveFromCollidables(Basic c)
         {
             collidables.Remove(c);
         }
