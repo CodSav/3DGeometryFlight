@@ -111,8 +111,11 @@
     <Compile Include="CollidableModel.cs" />
     <Compile Include="CollisionManager.cs" />
     <Compile Include="InputManager.cs" />
+<<<<<<< HEAD
     <Compile Include="ModelManager.cs" />
     <Compile Include="PlayerModel.cs" />
+=======
+>>>>>>> 14fc34c729f2e9eade893db4a946373c3f592426
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
