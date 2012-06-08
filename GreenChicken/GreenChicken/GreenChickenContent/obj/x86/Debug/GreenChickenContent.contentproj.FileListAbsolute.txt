@@ -1,0 +1,2 @@
+C:\Users\zdurtschi\Documents\Visual Studio 2010\Projects\GeometryFlight\3DGeometryFlight\GreenChicken\GreenChicken\GreenChickenContent\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\bwilson\Documents\Flight\trunk\GreenChicken\GreenChicken\GreenChickenContent\obj\x86\Debug\ResolveAssemblyReference.cache

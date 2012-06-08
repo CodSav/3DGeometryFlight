@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Sections>
+  <WaveBank Name="Wave Bank">Wave Bank
+{
+    Name = Wave Bank;
+    Xbox File = Xbox\Wave Bank.xwb;
+    Windows File = Win\Wave Bank.xwb;
+    Xbox Bank Path Edited = 0;
+    Windows Bank Path Edited = 0;
+    Seek Tables = 1;
+    Compression Preset Name = &lt;none&gt;;
+    Bank Last Revised Low = 3285499123;
+    Bank Last Revised High = 30229693;
+
+    Wave
+    {
+        Name = bomb-02;
+        File = ..\..\..\..\..\..\..\..\..\Desktop\GeoSounds\bomb-02.wav;
+        Build Settings Last Modified Low = 2503594401;
+        Build Settings Last Modified High = 30229693;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 1;
+            Sampling Rate = 11127;
+            Bits Per Sample = 0;
+            Play Region Offset = 56;
+            Play Region Length = 19106;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 3170494106;
+            Last Modified High = 30229498;
+        }
+    }
+
+    Wave
+    {
+        Name = bomb-03;
+        File = ..\..\..\..\..\..\..\..\..\Desktop\GeoSounds\bomb-03.wav;
+        Build Settings Last Modified Low = 2503614402;
+        Build Settings Last Modified High = 30229693;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 1;
+            Sampling Rate = 11025;
+            Bits Per Sample = 0;
+            Play Region Offset = 44;
+            Play Region Length = 21696;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 3310722127;
+            Last Modified High = 30229498;
+        }
+    }
+
+    Wave
+    {
+        Name = phasers3;
+        File = ..\..\..\..\..\..\..\..\..\Desktop\GeoSounds\phasers3.wav;
+        Build Settings Last Modified Low = 2503614402;
+        Build Settings Last Modified High = 30229693;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 1;
+            Sampling Rate = 11025;
+            Bits Per Sample = 0;
+            Play Region Offset = 44;
+            Play Region Length = 4080;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 1483847635;
+            Last Modified High = 30229498;
+        }
+    }
+}
+
+</WaveBank>
+</Sections>
