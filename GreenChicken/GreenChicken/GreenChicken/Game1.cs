@@ -11,6 +11,7 @@ namespace GreenChicken
 
         public InputManager InputManager;
         private GraphicsDeviceManager graphics;
+        public BasicManager BasicManager;
 
         public Game1()
         {
@@ -27,13 +28,15 @@ namespace GreenChicken
             Components.Add(InputManager);
             Camera = new Camera(this);
             Components.Add(Camera);
+            BasicManager = BasicManager.GetInstance(this);
+            Components.Add(BasicManager);
 
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            
+            BasicManager.AddBasic(new PlayerModel());
         }
 
         protected override void UnloadContent()
@@ -56,7 +59,7 @@ namespace GreenChicken
             base.Draw(gameTime);
         }
 
-        public void GetZoneOfPosition(Vector3 Position)
+        public void GetZoneOfPosition(Vector3 position)
         {
             throw new NotImplementedException();
         }

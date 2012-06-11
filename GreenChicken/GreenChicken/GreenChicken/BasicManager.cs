@@ -9,30 +9,26 @@ namespace GreenChicken
     {
         private readonly List<Basic> _basicObjects = new List<Basic>();
         private SpriteBatch _spriteBatch;
-        private BasicManager _basicManager;
+        private static BasicManager _basicManager;
 
         private BasicManager(Game game)
             : base(game)
         {
         }
 
-        public BasicManager GetInstance(Game game)
+        public static BasicManager GetInstance(Game game)
         {
-            if(_basicManager == null)
-                _basicManager = new BasicManager(game);
-            return _basicManager;
+            return _basicManager ?? (_basicManager = new BasicManager(game));
         }
 
         public override void Initialize()
         {
-            InitializeBasic();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            LoadContentBasic();
             base.LoadContent();
         }
 
@@ -48,32 +44,21 @@ namespace GreenChicken
             base.Draw(gameTime);
         }
 
+        public void AddBasic(Basic b)
+        {
+            _basicObjects.Add(b);
+        }
+
         private void DrawBasic()
         {
             // Loop through and draw each model
-            foreach (BasicModel bm in _basicObjects)
+            foreach (Basic bm in _basicObjects)
             {
                 bm.Draw(((Game1)Game).Camera);
             }
         }
 
         private void UpdateBasic()
-        {
-            foreach (Basic b in _basicObjects)
-            {
-                b.Update();
-            }
-        }
-
-        private void LoadContentBasic()
-        {
-            foreach (Basic b in _basicObjects)
-            {
-                b.Update();
-            }
-        }
-
-        private void InitializeBasic()
         {
             foreach (Basic b in _basicObjects)
             {

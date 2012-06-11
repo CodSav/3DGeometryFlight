@@ -42,13 +42,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="audio\GameAudio.xap">
-      <Name>GameAudio</Name>
-      <Importer>XactImporter</Importer>
-      <Processor>XactProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="audio\Win\" />
     <Folder Include="audio\Xbox\" />
   </ItemGroup>

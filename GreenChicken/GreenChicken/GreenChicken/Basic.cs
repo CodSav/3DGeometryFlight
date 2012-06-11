@@ -17,7 +17,7 @@ namespace GreenChicken
 
         protected virtual Matrix GetWorld()
         {
-            return World*Matrix.CreateTranslation(Position);
+            return _world*Matrix.CreateTranslation(Position);
         }
 
         #endregion
@@ -99,8 +99,6 @@ namespace GreenChicken
 
         #region GameComponent Helpers
 
-        public abstract void Initialize();
-        protected abstract void LoadContent();
         public abstract void Update();
         public abstract void Draw(Camera camera);
         #endregion

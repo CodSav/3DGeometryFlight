@@ -8,6 +8,7 @@ namespace GreenChicken
 
         public Camera(Game game) : base(game)
         {
+            View = Matrix.CreateLookAt(new Vector3(0, 30, -30), Vector3.Zero, Vector3.Up);
             Projection = Matrix.CreatePerspectiveFieldOfView(
                 MathHelper.PiOver4,
                 Game.Window.ClientBounds.Width/

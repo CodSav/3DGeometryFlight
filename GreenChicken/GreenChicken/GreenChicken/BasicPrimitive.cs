@@ -16,6 +16,11 @@ namespace GreenChicken
     {
         #region Vertex Data
 
+        protected BasicPrimitive()
+        {
+            effect = new BasicEffect(Game1.GameInstance.GraphicsDevice);
+        }
+
         protected VertexPositionColorTexture[] ColorTextureVerts;
         protected VertexPositionColor[] ColorVerts;
         protected PrimitiveFormat Format = PrimitiveFormat.Color;
@@ -146,12 +151,6 @@ namespace GreenChicken
         #endregion
 
         #region Implemented from Basic
-
-        protected override void LoadContent()
-        {
-            effect = new BasicEffect(Game1.GameInstance.GraphicsDevice);
-            LoadPrimitive();
-        }
 
         public override void Draw(Camera camera)
         {
