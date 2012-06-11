@@ -12,6 +12,7 @@ namespace GreenChicken
         public InputManager InputManager;
         private GraphicsDeviceManager graphics;
         public BasicManager BasicManager;
+        public Overlay Overlay;
 
         public Game1()
         {
@@ -30,6 +31,8 @@ namespace GreenChicken
             Components.Add(Camera);
             BasicManager = BasicManager.GetInstance(this);
             Components.Add(BasicManager);
+            Overlay = new Overlay(this);
+            Components.Add(Overlay);
 
             base.Initialize();
         }
@@ -39,8 +42,8 @@ namespace GreenChicken
             var p = new PlayerModel();
             BasicManager.AddBasic(p);
 
-            var e = new SimpleEnemy {Position = new Vector3(-10, 2, 10)};
-            BasicManager.AddBasic(e);
+//            var e = new SimpleEnemy {Position = new Vector3(-10, 2, 10)};
+//            BasicManager.AddBasic(e);
 
             Camera.Following = p;
         }
@@ -54,10 +57,6 @@ namespace GreenChicken
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
