@@ -10,6 +10,33 @@
       <Output>C:\Users\zdurtschi\Documents\Visual Studio 2010\Projects\GeometryFlight\3DGeometryFlight\GreenChicken\GreenChicken\GreenChicken\bin\x86\Debug\Content\fonts\scoreFont.xnb</Output>
       <Time>2012-06-11T08:35:21.3050687-06:00</Time>
     </Item>
+    <Item>
+      <Source>audio\bomb-02.wav</Source>
+      <Name>audio\bomb-02</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\zdurtschi\Documents\Visual Studio 2010\Projects\GeometryFlight\3DGeometryFlight\GreenChicken\GreenChicken\GreenChicken\bin\x86\Debug\Content\audio\bomb-02.xnb</Output>
+      <Time>2012-06-11T09:22:39.3913979-06:00</Time>
+    </Item>
+    <Item>
+      <Source>audio\bomb-03.wav</Source>
+      <Name>audio\bomb-03</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\zdurtschi\Documents\Visual Studio 2010\Projects\GeometryFlight\3DGeometryFlight\GreenChicken\GreenChicken\GreenChicken\bin\x86\Debug\Content\audio\bomb-03.xnb</Output>
+      <Time>2012-06-11T09:22:39.4984041-06:00</Time>
+    </Item>
+    <Item>
+      <Source>audio\phasers3.wav</Source>
+      <Name>audio\phasers3</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\zdurtschi\Documents\Visual Studio 2010\Projects\GeometryFlight\3DGeometryFlight\GreenChicken\GreenChicken\GreenChicken\bin\x86\Debug\Content\audio\phasers3.xnb</Output>
+      <Time>2012-06-11T09:22:39.5174052-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

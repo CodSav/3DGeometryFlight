@@ -225,15 +225,15 @@ Wave Bank
     Windows Bank Path Edited = 0;
     Seek Tables = 1;
     Compression Preset Name = <none>;
-    Bank Last Revised Low = 3285499123;
-    Bank Last Revised High = 30229693;
+    Bank Last Revised Low = 1706049688;
+    Bank Last Revised High = 30230502;
 
     Wave
     {
         Name = bomb-02;
-        File = ..\..\..\..\..\..\..\..\..\Desktop\GeoSounds\bomb-02.wav;
-        Build Settings Last Modified Low = 2503594401;
-        Build Settings Last Modified High = 30229693;
+        File = bomb-02.wav;
+        Build Settings Last Modified Low = 1562671487;
+        Build Settings Last Modified High = 30230502;
 
         Cache
         {
@@ -246,17 +246,17 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 3170494106;
-            Last Modified High = 30229498;
+            Last Modified Low = 162251387;
+            Last Modified High = 30230502;
         }
     }
 
     Wave
     {
         Name = bomb-03;
-        File = ..\..\..\..\..\..\..\..\..\Desktop\GeoSounds\bomb-03.wav;
-        Build Settings Last Modified Low = 2503614402;
-        Build Settings Last Modified High = 30229693;
+        File = bomb-03.wav;
+        Build Settings Last Modified Low = 1639515882;
+        Build Settings Last Modified High = 30230502;
 
         Cache
         {
@@ -269,17 +269,17 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 3310722127;
-            Last Modified High = 30229498;
+            Last Modified Low = 163321449;
+            Last Modified High = 30230502;
         }
     }
 
     Wave
     {
         Name = phasers3;
-        File = ..\..\..\..\..\..\..\..\..\Desktop\GeoSounds\phasers3.wav;
-        Build Settings Last Modified Low = 2503614402;
-        Build Settings Last Modified High = 30229693;
+        File = phasers3.wav;
+        Build Settings Last Modified Low = 1706049688;
+        Build Settings Last Modified High = 30230502;
 
         Cache
         {
@@ -292,8 +292,8 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 1483847635;
-            Last Modified High = 30229498;
+            Last Modified Low = 163511460;
+            Last Modified High = 30230502;
         }
     }
 }
@@ -305,6 +305,8 @@ Sound Bank
     Windows File = Win\Sound Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
+    Header Last Modified High = 0;
+    Header Last Modified Low = 0;
 
     Sound
     {

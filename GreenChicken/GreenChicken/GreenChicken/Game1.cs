@@ -30,6 +30,7 @@ namespace GreenChicken
             
             BasicManager = BasicManager.GetInstance(this);
             Components.Add(BasicManager);
+
             Overlay = new Overlay(this);
             Components.Add(Overlay);
 
@@ -44,8 +45,8 @@ namespace GreenChicken
             var p = new PlayerModel();
             BasicManager.AddBasic(p);
 
-//            var e = new SimpleEnemy {Position = new Vector3(-10, 2, 10)};
-//            BasicManager.AddBasic(e);
+            var e = new SimpleEnemy {Position = new Vector3(-10, 2, 10)};
+            BasicManager.AddBasic(e);
 
             Camera.Following = p;
         }
