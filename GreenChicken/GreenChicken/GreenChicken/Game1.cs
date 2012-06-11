@@ -24,12 +24,14 @@ namespace GreenChicken
 
         protected override void Initialize()
         {
-            InputManager.GetInstance(this);
+            InputManager = InputManager.GetInstance(this);
             Components.Add(InputManager);
-            Camera = new Camera(this);
-            Components.Add(Camera);
+            
             BasicManager = BasicManager.GetInstance(this);
             Components.Add(BasicManager);
+
+            Camera = new Camera(this);
+            Components.Add(Camera);
 
             base.Initialize();
         }

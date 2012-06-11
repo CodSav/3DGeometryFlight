@@ -8,8 +8,6 @@ namespace GreenChicken
     {
         private const float PLAYER_SPEED = 1.5f;
         private readonly InputManager inputManager;
-        private Vector3 _playerPosition = Vector3.Zero;
-
 
         public PlayerModel(bool isCollidable = true)
         {
@@ -20,7 +18,7 @@ namespace GreenChicken
 
         public override void Update()
         {
-            _playerPosition = Position;
+            Vector3 _playerPosition = Position;
             if (inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_LEFT))
             {
                 _playerPosition.X -= PLAYER_SPEED;
@@ -47,11 +45,12 @@ namespace GreenChicken
             {
                 _playerPosition.Y -= PLAYER_SPEED;
             }
-            Position = _position;
-            KeyboardState keyboardState = Keyboard.GetState();
+            Position = _playerPosition;
+            
 
             //TEMP ROTATION CODE TO TEST
             //TODO REMOVE
+            KeyboardState keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.Z))
                 Rotation *= Matrix.CreateRotationZ(MathHelper.PiOver4/60);
             if (keyboardState.IsKeyDown(Keys.X))
@@ -94,7 +93,7 @@ namespace GreenChicken
 
         protected override Matrix GetWorld()
         {
-            return _world*Matrix.CreateTranslation(Position) * Rotation;
+            return _world * Rotation * Matrix.CreateTranslation(Position);
         }
 
         #endregion
