@@ -12,6 +12,7 @@ namespace GreenChicken
         public InputManager InputManager;
         private GraphicsDeviceManager graphics;
         public BasicManager BasicManager;
+        public StateManager StateManager;
         public Overlay Overlay;
 
         public Game1()
@@ -30,7 +31,6 @@ namespace GreenChicken
             
             BasicManager = BasicManager.GetInstance(this);
             Components.Add(BasicManager);
-
             Overlay = new Overlay(this);
             Components.Add(Overlay);
 
@@ -57,6 +57,7 @@ namespace GreenChicken
 
         protected override void Update(GameTime gameTime)
         {
+           // StateManager.current.Update(gameTime);
             base.Update(gameTime);
         }
 
