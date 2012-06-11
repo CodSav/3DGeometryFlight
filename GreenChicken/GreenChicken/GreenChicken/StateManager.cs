@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace GreenChicken
 {
-    class StateManager : DrawableGameComponent
+    public class StateManager : DrawableGameComponent
     {
 
         public static PauseState pause = new PauseState();
@@ -17,6 +17,10 @@ namespace GreenChicken
 
         public static State current;
 
+
+        public StateManager(Game game) : base(game)
+        {
+        }
 
         public void ChangeState()
         {

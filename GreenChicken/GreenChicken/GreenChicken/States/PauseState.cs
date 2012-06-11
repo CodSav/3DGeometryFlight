@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GreenChicken.States
 {
-    class PauseState : State
+    public class PauseState : State
     {
         public override void Update(Microsoft.Xna.Framework.GameTime gt)
         {

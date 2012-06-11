@@ -119,6 +119,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="SimpleEnemy.cs" />
+    <Compile Include="State.cs" />
+    <Compile Include="StateManager.cs" />
+    <Compile Include="States\BeginState.cs" />
+    <Compile Include="States\EndState.cs" />
+    <Compile Include="States\PauseState.cs" />
+    <Compile Include="States\PlayState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
