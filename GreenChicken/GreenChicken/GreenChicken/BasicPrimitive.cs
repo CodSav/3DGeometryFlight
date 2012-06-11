@@ -114,12 +114,10 @@ namespace GreenChicken
                     VertexBuffer.SetData(TextureVerts);
                     break;
             }
-            var buffers = (VertexBufferBinding[])Game1.GameInstance.GraphicsDevice.GetVertexBuffers().Clone();
+            var buffers = Game1.GameInstance.GraphicsDevice.GetVertexBuffers();
             var bufferSize = buffers.Length;
             Array.Resize(ref buffers, bufferSize + 1);
             buffers[bufferSize] = VertexBuffer;
-            Game1.GameInstance.GraphicsDevice.SetVertexBuffers(buffers);
-            //Console.WriteLine();
             effect = new BasicEffect(Game1.GameInstance.GraphicsDevice);
         }
 
