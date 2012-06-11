@@ -68,6 +68,14 @@ namespace GreenChicken
 
         #endregion
 
+        #region Rotation
+
+        public Matrix Rotation { get { return _rotation; } set { _rotation = value; } }
+
+        protected Matrix _rotation = Matrix.Identity;
+
+        #endregion
+
         #region Zone
 
         //Zone is a specific area of space in which to detect collisions. 
@@ -101,6 +109,7 @@ namespace GreenChicken
 
         public abstract void Update();
         public abstract void Draw(Camera camera);
+
         #endregion
     }
 }

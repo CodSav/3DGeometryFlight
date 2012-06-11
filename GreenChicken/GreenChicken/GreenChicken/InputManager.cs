@@ -51,16 +51,12 @@ namespace GreenChicken
         private void RegisterKeys()
         {
             // TODO: Construct any child components here
-            //_registeredKeys[(int)GameKeyCodes.MOVE_LEFT] = Keys.Left;
-            //_registeredKeys[(int)GameKeyCodes.MOVE_RIGHT] = Keys.Right;
-            //_registeredKeys[(int)GameKeyCodes.MOVE_UP] = Keys.Up;
-            //_registeredKeys[(int)GameKeyCodes.MOVE_DOWN] = Keys.Down;
-            //_registeredKeys[(int)GameKeyCodes.ZOOM_IN] = Keys.W;
-            //_registeredKeys[(int)GameKeyCodes.ZOOM_OUT] = Keys.S;
-            //_registeredKeys[(int)GameKeyCodes.ROTATE_LEFT] = Keys.A;
-            //_registeredKeys[(int)GameKeyCodes.ROTATE_RIGHT] = Keys.D;
-            //_registeredKeys[(int)GameKeyCodes.SWITCH_MODEL_MODES] = Keys.P;
-            //_registeredKeys[(int)GameKeyCodes.SWITCH_TEXTURE_MODE] = Keys.O;
+            _registeredKeys[(int)GameKeyCodes.MOVE_LEFT] = Keys.Left;
+            _registeredKeys[(int)GameKeyCodes.MOVE_RIGHT] = Keys.Right;
+            _registeredKeys[(int)GameKeyCodes.MOVE_UP] = Keys.Up;
+            _registeredKeys[(int)GameKeyCodes.MOVE_DOWN] = Keys.Down;
+            _registeredKeys[(int)GameKeyCodes.MOVE_FORWARD] = Keys.W;
+            _registeredKeys[(int)GameKeyCodes.MOVE_BACKWARD] = Keys.S;
         }
 
         public static InputManager GetInstance(Game game)

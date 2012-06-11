@@ -36,7 +36,9 @@ namespace GreenChicken
 
         protected override void LoadContent()
         {
-            BasicManager.AddBasic(new PlayerModel());
+            var p = new PlayerModel();
+            BasicManager.AddBasic(p);
+            Camera.Following = p;
         }
 
         protected override void UnloadContent()

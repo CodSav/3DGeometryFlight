@@ -8,7 +8,7 @@ namespace GreenChicken
 
         public Camera(Game game) : base(game)
         {
-            View = Matrix.CreateLookAt(new Vector3(0, 30, -30), Vector3.Zero, Vector3.Up);
+            View = Matrix.CreateLookAt(reference, Vector3.Zero, Vector3.Up);
             Projection = Matrix.CreatePerspectiveFieldOfView(
                 MathHelper.PiOver4,
                 Game.Window.ClientBounds.Width/
@@ -33,20 +33,28 @@ namespace GreenChicken
 
         public Matrix View { get; protected set; }
         public Matrix Projection { get; protected set; }
+        private Vector3 reference = new Vector3(0,10,-50);
+        public Basic Following { get; set; }
 
         #endregion
 
-        public override void Initialize()
+        private void CreateLookAt()
         {
-            // TODO: Add your initialization code here
+            Matrix rotationMatrix = Following.Rotation;
 
-            base.Initialize();
+            Vector3 transformedReference =
+                Vector3.Transform(reference, rotationMatrix);
+
+            Vector3 cameraPosition = transformedReference + Following.Position;
+
+            Vector3 cameraLookat =  Following.Position;
+
+            View = Matrix.CreateLookAt(cameraPosition, cameraLookat, Vector3.TransformNormal(Vector3.Up, rotationMatrix));
         }
 
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
-
+            CreateLookAt();
             base.Update(gameTime);
         }
     }
