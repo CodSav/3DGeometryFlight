@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -113,6 +114,13 @@ namespace GreenChicken
                     VertexBuffer.SetData(TextureVerts);
                     break;
             }
+            var buffers = (VertexBufferBinding[])Game1.GameInstance.GraphicsDevice.GetVertexBuffers().Clone();
+            var bufferSize = buffers.Length;
+            Array.Resize(ref buffers, bufferSize + 1);
+            buffers[bufferSize] = VertexBuffer;
+            Game1.GameInstance.GraphicsDevice.SetVertexBuffers(buffers);
+            //Console.WriteLine();
+            effect = new BasicEffect(Game1.GameInstance.GraphicsDevice);
         }
 
         protected abstract void CreateVertexArray();
@@ -155,10 +163,12 @@ namespace GreenChicken
         public override void Draw(Camera camera)
         {
             Game1.GameInstance.GraphicsDevice.SetVertexBuffer(VertexBuffer);
+            
 
             effect.World = World;
             effect.View = camera.View;
             effect.Projection = camera.Projection;
+            effect.VertexColorEnabled = true;
             foreach (EffectPass pass in effect.CurrentTechnique.Passes)
             {
                 pass.Apply();

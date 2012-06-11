@@ -38,6 +38,10 @@ namespace GreenChicken
         {
             var p = new PlayerModel();
             BasicManager.AddBasic(p);
+
+            var e = new SimpleEnemy {Position = new Vector3(-10, 2, 10)};
+            BasicManager.AddBasic(e);
+
             Camera.Following = p;
         }
 
@@ -57,13 +61,15 @@ namespace GreenChicken
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.RasterizerState = new RasterizerState { CullMode = CullMode.None };
 
             base.Draw(gameTime);
         }
 
         public void GetZoneOfPosition(Vector3 position)
         {
-            throw new NotImplementedException();
+            //TODO GET ZONE
+            //throw new NotImplementedException();
         }
     }
 }
