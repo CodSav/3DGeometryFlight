@@ -42,7 +42,10 @@ namespace GreenChicken
 
         protected override void LoadContent()
         {
-            var p = new PlayerModel();
+            var w = new WorldGrid();
+            BasicManager.AddBasic(w);
+
+            var p = new PlayerModel{Position = new Vector3(0,0,0)};
             BasicManager.AddBasic(p);
 
             var e = new SimpleEnemy {Position = new Vector3(-10, 2, 10)};
@@ -63,7 +66,7 @@ namespace GreenChicken
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             GraphicsDevice.RasterizerState = new RasterizerState { CullMode = CullMode.None };
 
             base.Draw(gameTime);

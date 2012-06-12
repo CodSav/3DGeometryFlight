@@ -10,6 +10,7 @@ namespace GreenChicken
             IsCollidable = isCollidable;
             LoadPrimitive();
         }
+
         #region Overrides of Basic
 
         public override void Update()

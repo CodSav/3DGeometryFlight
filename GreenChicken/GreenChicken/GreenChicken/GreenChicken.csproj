@@ -125,6 +125,7 @@
     <Compile Include="States\EndState.cs" />
     <Compile Include="States\PauseState.cs" />
     <Compile Include="States\PlayState.cs" />
+    <Compile Include="WorldGrid.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
