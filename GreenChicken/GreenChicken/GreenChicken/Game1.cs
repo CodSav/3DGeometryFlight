@@ -14,6 +14,10 @@ namespace GreenChicken
         public BasicManager BasicManager;
         public Overlay Overlay;
 
+        private float _projectileSpeed = 1;
+        private int _projectileDelay = 42;
+        private int _projectileCountdown;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -27,7 +31,7 @@ namespace GreenChicken
         {
             InputManager = InputManager.GetInstance(this);
             Components.Add(InputManager);
-            
+
             BasicManager = BasicManager.GetInstance(this);
             Components.Add(BasicManager);
 
@@ -42,13 +46,16 @@ namespace GreenChicken
 
         protected override void LoadContent()
         {
-            var p = new PlayerModel();
-            BasicManager.AddBasic(p);
+            var player = new PlayerModel();
+            BasicManager.AddBasic(player);
 
-            var e = new SimpleEnemy {Position = new Vector3(-10, 2, 10)};
-            BasicManager.AddBasic(e);
+            var enemy = new SimpleEnemy {Position = new Vector3(-10, 2, 10)};
+            BasicManager.AddBasic(enemy);
 
-            Camera.Following = p;
+            var projectile = new Projectile {Position = new Vector3(-6, 2, 10)};
+            BasicManager.AddBasic(projectile);
+
+            Camera.Following = player;
         }
 
         protected override void UnloadContent()
@@ -57,13 +64,14 @@ namespace GreenChicken
 
         protected override void Update(GameTime gameTime)
         {
+            FireShots(gameTime);
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            GraphicsDevice.RasterizerState = new RasterizerState { CullMode = CullMode.None };
+            GraphicsDevice.RasterizerState = new RasterizerState {CullMode = CullMode.None};
 
             base.Draw(gameTime);
         }
@@ -72,6 +80,21 @@ namespace GreenChicken
         {
             //TODO GET ZONE
             //throw new NotImplementedException();
+        }
+
+        protected void FireShots(GameTime gameTime)
+        {
+            if (_projectileCountdown <= 0)
+            {
+                //TODO: Use input manager
+                if (InputManager.KeyDown(InputManager.GameKeyCodes.FIRE))
+                {
+                    BasicManager.AddShot(Camera.Following.Position + new Vector3(0, 0, -1), Camera.Following.Rotation.Translation*_projectileSpeed);
+                    _projectileCountdown = _projectileDelay;
+                }
+            }
+            else
+                _projectileCountdown -= gameTime.ElapsedGameTime.Milliseconds;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace GreenChicken
         public int Score { get; private set; }
         private SpriteBatch _spriteBatch;
         private Game _game;
-        private SpriteFont _scoreFont; 
+        private SpriteFont _scoreFont;
 
 
         public Overlay(Game game) : base(game)
@@ -30,13 +30,11 @@ namespace GreenChicken
 
         public override void Initialize()
         {
-            
             base.Initialize();
         }
 
         public override void Update(GameTime gameTime)
         {
-            
             base.Update(gameTime);
         }
 
@@ -57,7 +55,10 @@ namespace GreenChicken
 
         public void IncreaseScore(int addedValue)
         {
-            Score += addedValue;
+            if (addedValue > 0)
+            {
+                Score += addedValue;
+            }
         }
     }
 }

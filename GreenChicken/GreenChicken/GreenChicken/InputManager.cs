@@ -57,6 +57,8 @@ namespace GreenChicken
             _registeredKeys[(int)GameKeyCodes.MOVE_DOWN] = Keys.Down;
             _registeredKeys[(int)GameKeyCodes.MOVE_FORWARD] = Keys.W;
             _registeredKeys[(int)GameKeyCodes.MOVE_BACKWARD] = Keys.S;
+            _registeredKeys[(int)GameKeyCodes.FIRE] = Keys.Space;
+
         }
 
         public static InputManager GetInstance(Game game)
