@@ -13,7 +13,7 @@ namespace GreenChicken
                 MathHelper.PiOver4,
                 Game.Window.ClientBounds.Width/
                 (float) Game.Window.ClientBounds.Height,
-                1, 100);
+                1, 1000);
         }
 
         public Camera(Game game, Vector3 pos, Vector3 target, Vector3 up)
@@ -24,7 +24,7 @@ namespace GreenChicken
                 MathHelper.PiOver4,
                 Game.Window.ClientBounds.Width/
                 (float) Game.Window.ClientBounds.Height,
-                1, 100);
+                1, 1000);
         }
 
         #endregion

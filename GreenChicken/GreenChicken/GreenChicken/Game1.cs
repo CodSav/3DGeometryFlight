@@ -12,6 +12,7 @@ namespace GreenChicken
         public InputManager InputManager;
         private GraphicsDeviceManager graphics;
         public BasicManager BasicManager;
+        public StateManager StateManager;
         public Overlay Overlay;
 
         private float _projectileSpeed = 1;
@@ -34,7 +35,6 @@ namespace GreenChicken
 
             BasicManager = BasicManager.GetInstance(this);
             Components.Add(BasicManager);
-
             Overlay = new Overlay(this);
             Components.Add(Overlay);
 
@@ -46,8 +46,11 @@ namespace GreenChicken
 
         protected override void LoadContent()
         {
-            var player = new PlayerModel();
-            BasicManager.AddBasic(player);
+            var w = new WorldGrid();
+            BasicManager.AddBasic(w);
+
+            var p = new PlayerModel{Position = new Vector3(0,0,0)};
+            BasicManager.AddBasic(p);
 
             var enemy = new SimpleEnemy {Position = new Vector3(-10, 2, 10)};
             BasicManager.AddBasic(enemy);
@@ -70,7 +73,7 @@ namespace GreenChicken
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             GraphicsDevice.RasterizerState = new RasterizerState {CullMode = CullMode.None};
 
             base.Draw(gameTime);
