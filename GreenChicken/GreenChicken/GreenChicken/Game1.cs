@@ -52,13 +52,13 @@ namespace GreenChicken
             var p = new PlayerModel{Position = new Vector3(0,0,0)};
             BasicManager.AddBasic(p);
 
-            var enemy = new SimpleEnemy {Position = new Vector3(-10, 2, 10)};
-            BasicManager.AddBasic(enemy);
+            var e = new SimpleEnemy {Position = new Vector3(-10, 2, 10)};
+            BasicManager.AddBasic(e);
 
             var projectile = new Projectile {Position = new Vector3(-6, 2, 10)};
             BasicManager.AddBasic(projectile);
 
-            Camera.Following = player;
+            Camera.Following = p;
         }
 
         protected override void UnloadContent()

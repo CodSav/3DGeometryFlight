@@ -21,11 +21,11 @@ namespace GreenChicken
             Vector3 playerPosition = Position;
             if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_LEFT))
             {
-                playerPosition.X -= PLAYER_SPEED;
+                playerPosition.X += PLAYER_SPEED;
             }
             else if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_RIGHT))
             {
-                playerPosition.X += PLAYER_SPEED;
+                playerPosition.X -= PLAYER_SPEED;
             }
 
             if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_BACKWARD))
