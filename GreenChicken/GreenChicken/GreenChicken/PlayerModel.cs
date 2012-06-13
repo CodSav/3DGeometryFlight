@@ -7,15 +7,13 @@ namespace GreenChicken
 {
     internal class PlayerModel : BasicPrimitive
     {
-        private const float PLAYER_SPEED = 1.5f;
-        private readonly InputManager inputManager;
-
-        private int rotateCount = 0;
+        private const float PLAYER_SPEED = 2f;
+        private readonly InputManager _inputManager;
 
         public PlayerModel(bool isCollidable = true)
         {
             IsCollidable = isCollidable;
-            inputManager = InputManager.GetInstance();
+            _inputManager = InputManager.GetInstance();
             LoadPrimitive();
         }
 
@@ -33,46 +31,50 @@ namespace GreenChicken
 
             if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_BACKWARD))
             {
-                playerPosition += Rotation.Forward * PLAYER_SPEED;
+                playerPosition += Rotation.Forward*PLAYER_SPEED;
             }
             else if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_FORWARD))
             {
-                playerPosition += Rotation.Backward * PLAYER_SPEED;
+                playerPosition += Rotation.Backward*PLAYER_SPEED;
             }
 
-        private void PlayerGetInput()
-        {
-            bool move = false;
-            if (inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_LEFT))
+            if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_UP))
             {
                 playerPosition += Rotation.Up * PLAYER_SPEED;
             }
-            if (inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_RIGHT))
+            else if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_DOWN))
             {
                 playerPosition += Rotation.Down * PLAYER_SPEED;
             }
-            if (inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_UP))
+
+            if (playerPosition.X > 200)
             {
-                Rotation *= Matrix.CreateRotationX(MathHelper.ToRadians(-2));
-            }if (inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_DOWN))
-            {
-                Rotation *= Matrix.CreateRotationX(MathHelper.ToRadians(2));
+                playerPosition.X = 200;
             }
-            if ( inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_FORWARD))
-                Position += Rotation.Backward* PLAYER_SPEED;
-            else if(inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_BACKWARD))
-                Position -= Rotation.Backward * PLAYER_SPEED;
-        }
+            else if (playerPosition.X < -200)
+            {
+                playerPosition.X = -200;
+            }
 
-        private void OldMovement()
-        {
-            bool move = false;
-            Vector3 _playerPosition = Position;
-            
+            if (playerPosition.Y > 200)
+            {
+                playerPosition.Y = 200;
+            }
+            else if (playerPosition.Y < -200)
+            {
+                playerPosition.Y = -200;
+            }
 
-            _playerPosition = Rotation.Backward * -PLAYER_SPEED;
-            Position += _playerPosition;
+            if (playerPosition.Z > 200)
+            {
+                playerPosition.Z = 200;
+            }
+            else if (playerPosition.Z < -200)
+            {
+                playerPosition.Z = -200;
+            }
 
+            Position = playerPosition;
 
             //TEMP ROTATION CODE TO TEST
             //TODO REMOVE
@@ -87,7 +89,7 @@ namespace GreenChicken
 
         #region Overrides of BasicPrimitive
 
-        protected override void CreateVertexArray()
+        protected override void CreateVertexArray ()
         {
             Type = PrimitiveType.LineList;
             ColorVerts = new VertexPositionColor[12];
@@ -117,9 +119,9 @@ namespace GreenChicken
                 new Vector3(-2, 0, 0), Color.White);
         }
 
-        protected override Matrix GetWorld()
+        protected override Matrix GetWorld ()
         {
-            return _world * Rotation * Matrix.CreateTranslation(Position);
+            return _world*Rotation*Matrix.CreateTranslation(Position);
         }
 
         #endregion
