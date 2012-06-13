@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace GreenChicken
@@ -21,7 +23,8 @@ namespace GreenChicken
             SHOOT_DOWN = 9,
             FIRE = 10,
             BOMB = 11,
-            PAUSE = 12
+            PAUSE = 12,
+            QUIT = 13
         }
 
         private readonly int _numOfKeys;
@@ -34,7 +37,7 @@ namespace GreenChicken
         private InputManager(Game game)
             : base(game)
         {
-            _numOfKeys = Enum.GetNames(typeof(GameKeyCodes)).Length;
+            _numOfKeys = Enum.GetNames(typeof (GameKeyCodes)).Length;
             _prevState = new bool[_numOfKeys];
             _currentState = new bool[_numOfKeys];
             _registeredKeys = new Keys[_numOfKeys];
@@ -51,18 +54,18 @@ namespace GreenChicken
         private void RegisterKeys()
         {
             // TODO: Construct any child components here
-            _registeredKeys[(int)GameKeyCodes.MOVE_LEFT] = Keys.Left;
-            _registeredKeys[(int)GameKeyCodes.MOVE_RIGHT] = Keys.Right;
-            _registeredKeys[(int)GameKeyCodes.MOVE_UP] = Keys.Up;
-            _registeredKeys[(int)GameKeyCodes.MOVE_DOWN] = Keys.Down;
-            _registeredKeys[(int)GameKeyCodes.MOVE_FORWARD] = Keys.W;
-            _registeredKeys[(int)GameKeyCodes.MOVE_BACKWARD] = Keys.S;
-            _registeredKeys[(int)GameKeyCodes.FIRE] = Keys.Space;
-            _registeredKeys[(int)GameKeyCodes.SHOOT_DOWN] = Keys.K;
-            _registeredKeys[(int)GameKeyCodes.SHOOT_UP] = Keys.I;
-            _registeredKeys[(int)GameKeyCodes.SHOOT_LEFT] = Keys.J;
-            _registeredKeys[(int)GameKeyCodes.SHOOT_RIGHT] = Keys.L;
-
+            _registeredKeys[(int) GameKeyCodes.MOVE_LEFT] = Keys.Left;
+            _registeredKeys[(int) GameKeyCodes.MOVE_RIGHT] = Keys.Right;
+            _registeredKeys[(int) GameKeyCodes.MOVE_UP] = Keys.Up;
+            _registeredKeys[(int) GameKeyCodes.MOVE_DOWN] = Keys.Down;
+            _registeredKeys[(int) GameKeyCodes.MOVE_FORWARD] = Keys.W;
+            _registeredKeys[(int) GameKeyCodes.MOVE_BACKWARD] = Keys.S;
+            _registeredKeys[(int) GameKeyCodes.FIRE] = Keys.Space;
+            _registeredKeys[(int) GameKeyCodes.SHOOT_DOWN] = Keys.K;
+            _registeredKeys[(int) GameKeyCodes.SHOOT_UP] = Keys.I;
+            _registeredKeys[(int) GameKeyCodes.SHOOT_LEFT] = Keys.J;
+            _registeredKeys[(int) GameKeyCodes.SHOOT_RIGHT] = Keys.L;
+            _registeredKeys[(int) GameKeyCodes.QUIT] = Keys.Escape;
         }
 
         public static InputManager GetInstance(Game game)
@@ -77,12 +80,12 @@ namespace GreenChicken
 
         public bool KeyDown(GameKeyCodes keyID)
         {
-            return (_currentState[(int)keyID]);
+            return (_currentState[(int) keyID]);
         }
 
         public bool KeyPressed(GameKeyCodes keyID)
         {
-            return (_currentState[(int)keyID] && !_prevState[(int)keyID]);
+            return (_currentState[(int) keyID] && !_prevState[(int) keyID]);
         }
 
         public override void Update(GameTime gameTime)

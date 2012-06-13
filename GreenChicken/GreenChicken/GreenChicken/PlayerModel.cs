@@ -9,16 +9,19 @@ namespace GreenChicken
     {
         private const float PLAYER_SPEED = 2f;
         private readonly InputManager _inputManager;
+        private MouseState currentMouseState, prevMouseState;
 
         public PlayerModel(bool isCollidable = true)
         {
             IsCollidable = isCollidable;
             _inputManager = InputManager.GetInstance();
             LoadPrimitive();
+            prevMouseState = Mouse.GetState();
         }
 
         public override void Update()
         {
+            currentMouseState = Mouse.GetState();
             Vector3 playerPosition = Position;
             if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_LEFT))
             {
@@ -36,15 +39,6 @@ namespace GreenChicken
             else if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_FORWARD))
             {
                 playerPosition += Rotation.Backward*PLAYER_SPEED;
-            }
-
-            if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_UP))
-            {
-                playerPosition += Rotation.Up * PLAYER_SPEED;
-            }
-            else if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_DOWN))
-            {
-                playerPosition += Rotation.Down * PLAYER_SPEED;
             }
 
             if (playerPosition.X > 200)
@@ -76,20 +70,19 @@ namespace GreenChicken
 
             Position = playerPosition;
 
-            //TEMP ROTATION CODE TO TEST
-            //TODO REMOVE
-            KeyboardState keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.Z))
-                Rotation = Matrix.CreateRotationZ(MathHelper.ToRadians(90));
-            if (keyboardState.IsKeyDown(Keys.X))
-                Rotation *= Matrix.CreateRotationY(MathHelper.PiOver4 / 60);
-            if (keyboardState.IsKeyDown(Keys.C))
-                Rotation *= Matrix.CreateRotationX(MathHelper.PiOver4 / 60);
+            //TODO: Handle with InputManager
+            float angleX = (prevMouseState.X - currentMouseState.X)*0.005f;
+            float angleY = (prevMouseState.Y - currentMouseState.Y)*0.005f;
+
+            Rotation *= Matrix.CreateFromAxisAngle(Rotation.Up, angleX);
+            Rotation *= Matrix.CreateFromAxisAngle(Rotation.Left, angleY);
+
+            prevMouseState = currentMouseState;
         }
 
         #region Overrides of BasicPrimitive
 
-        protected override void CreateVertexArray ()
+        protected override void CreateVertexArray()
         {
             Type = PrimitiveType.LineList;
             ColorVerts = new VertexPositionColor[12];
@@ -119,7 +112,7 @@ namespace GreenChicken
                 new Vector3(-2, 0, 0), Color.White);
         }
 
-        protected override Matrix GetWorld ()
+        protected override Matrix GetWorld()
         {
             return _world*Rotation*Matrix.CreateTranslation(Position);
         }

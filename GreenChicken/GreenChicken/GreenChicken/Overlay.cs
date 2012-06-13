@@ -60,6 +60,9 @@ namespace GreenChicken
 //            _spriteBatch.DrawString(_scoreFont, "Left: " + Game1.GameInstance.Camera.Following.Rotation.Left, new Vector2(10, 415), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
 //            _spriteBatch.DrawString(_scoreFont, "Right: " + Game1.GameInstance.Camera.Following.Rotation.Right, new Vector2(10, 430), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
 
+            _spriteBatch.DrawString(_scoreFont, Mouse.GetState().X + ": MouseX", new Vector2(600, 70), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            _spriteBatch.DrawString(_scoreFont, Mouse.GetState().Y + ": MouseY", new Vector2(600, 85), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+
             _spriteBatch.End();
 
             base.Draw(gameTime);

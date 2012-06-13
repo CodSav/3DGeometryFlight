@@ -64,6 +64,9 @@ namespace GreenChicken
 
         protected override void Update(GameTime gameTime)
         {
+            if (InputManager.KeyPressed(InputManager.GameKeyCodes.QUIT))
+                this.Exit();
+
             FireShots(gameTime);
             base.Update(gameTime);
         }
