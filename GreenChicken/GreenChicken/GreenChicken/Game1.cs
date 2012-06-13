@@ -15,7 +15,7 @@ namespace GreenChicken
         public StateManager StateManager;
         public Overlay Overlay;
 
-        private const float PROJECTILE_SPEED = 1;
+        private const float PROJECTILE_SPEED = 3;
         private const int PROJECTILE_DELAY = 108;
         private int _projectileCountdown;
 
@@ -86,34 +86,24 @@ namespace GreenChicken
         {
             if (_projectileCountdown <= 0)
             {
-//                if (InputManager.KeyDown(InputManager.GameKeyCodes.FIRE))
-//                {
-//                    BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Translation*_projectileSpeed);
-//                    _projectileCountdown = _projectileDelay;
-//                }
-                //TODO: Proper firing directions
                 if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_UP)))
                 {
-                    BasicManager.AddShot(Camera.Following.Position,
-                                         Camera.Following.Rotation.Translation*PROJECTILE_SPEED*new Vector3(0,0,1));
+                    BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Backward*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
                 }
                 else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_DOWN)))
                 {
-                    BasicManager.AddShot(Camera.Following.Position,
-                                         Camera.Following.Rotation.Translation*PROJECTILE_SPEED*new Vector3(0,0,-1));
+                    BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Forward*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
                 }
                 else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_LEFT)))
                 {
-                    BasicManager.AddShot(Camera.Following.Position,
-                                         Camera.Following.Rotation.Translation*PROJECTILE_SPEED*new Vector3(-1,0,0));
+                    BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Right*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
                 }
                 else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_RIGHT)))
                 {
-                    BasicManager.AddShot(Camera.Following.Position,
-                                         Camera.Following.Rotation.Translation*PROJECTILE_SPEED*new Vector3(1,0,0));
+                    BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Left*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
                 }
             }

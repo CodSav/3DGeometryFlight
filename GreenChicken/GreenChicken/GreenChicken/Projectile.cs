@@ -9,15 +9,27 @@ namespace GreenChicken
 {
     class Projectile : BasicPrimitive
     {
-        public Projectile(bool isCollidable = true)
+        private float _yawAngle = 0;
+        private float _pitchAngle = 0;
+        private float _rollAngle = 0;
+        private Vector3 _direction;
+        
+        public Projectile(Vector3 position, Vector3 direction, float yaw, float pitch, float roll, bool isCollidable = true)
         {
+            World = Matrix.CreateTranslation(position);
+            _direction = direction;
+            _yawAngle = yaw;
+            _pitchAngle = pitch;
+            _rollAngle = roll;
             IsCollidable = isCollidable;
             LoadPrimitive();
         }
 
         public override void Update()
         {
-            World *= Rotation;
+            Rotation *= Matrix.CreateFromYawPitchRoll(_yawAngle, _pitchAngle, _rollAngle);
+
+            World *= Matrix.CreateTranslation(_direction);
         }
 
         protected override void CreateVertexArray()

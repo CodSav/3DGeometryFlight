@@ -97,9 +97,9 @@ namespace GreenChicken
             //TODO: Make direction/rotation more right.
             if (direction == Vector3.Zero)
             {
-                direction = new Vector3(0,0,1);
+                direction = new Vector3(0, 0, 1);
             }
-            _shots.Add(new Projectile(true) {Position = position, Rotation = Matrix.CreateTranslation(direction)});
+            _shots.Add(new Projectile(position, direction, 0, 0, 0, true));
         }
 
         public int GetNumberOfShots()

@@ -52,6 +52,14 @@ namespace GreenChicken
             _spriteBatch.DrawString(_scoreFont, "Z: " + Game1.GameInstance.Camera.Following.Position.Z, new Vector2(10, 55), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             _spriteBatch.DrawString(_scoreFont, "Shots: " + Game1.GameInstance.BasicManager.GetNumberOfShots(), new Vector2(10, 70), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
 
+//            // Use to see postion vectors
+//            _spriteBatch.DrawString(_scoreFont, "Forward: " + Game1.GameInstance.Camera.Following.Rotation.Forward, new Vector2(10, 355), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+//            _spriteBatch.DrawString(_scoreFont, "Backward: " + Game1.GameInstance.Camera.Following.Rotation.Backward, new Vector2(10, 370), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+//            _spriteBatch.DrawString(_scoreFont, "Up: " + Game1.GameInstance.Camera.Following.Rotation.Up, new Vector2(10, 385), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+//            _spriteBatch.DrawString(_scoreFont, "Down: " + Game1.GameInstance.Camera.Following.Rotation.Down, new Vector2(10, 400), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+//            _spriteBatch.DrawString(_scoreFont, "Left: " + Game1.GameInstance.Camera.Following.Rotation.Left, new Vector2(10, 415), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+//            _spriteBatch.DrawString(_scoreFont, "Right: " + Game1.GameInstance.Camera.Following.Rotation.Right, new Vector2(10, 430), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+
             _spriteBatch.End();
 
             base.Draw(gameTime);
