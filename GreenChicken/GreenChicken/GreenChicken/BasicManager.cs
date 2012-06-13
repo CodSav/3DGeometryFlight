@@ -11,7 +11,7 @@ namespace GreenChicken
         private SpriteBatch _spriteBatch;
         private static BasicManager _basicManager;
         private List<Basic> _shots = new List<Basic>();
-        private float _shotMinZ = -3000f;
+        private const float SHOT_BOUND = 200;
 
         private BasicManager(Game game)
             : base(game)
@@ -83,7 +83,8 @@ namespace GreenChicken
             for (int i = 0; i < _shots.Count; ++i)
             {
                 _shots[i].Update();
-                if (_shots[i].World.Translation.Z < _shotMinZ)
+                if (_shots[i].World.Translation.Z < -SHOT_BOUND || _shots[i].World.Translation.Y < -SHOT_BOUND || _shots[i].World.Translation.X < -SHOT_BOUND ||
+                    _shots[i].World.Translation.Z > SHOT_BOUND || _shots[i].World.Translation.Y > SHOT_BOUND || _shots[i].World.Translation.X > SHOT_BOUND)
                 {
                     _shots.RemoveAt(i);
                     --i;
@@ -94,7 +95,16 @@ namespace GreenChicken
         public void AddShot(Vector3 position, Vector3 direction)
         {
             //TODO: Make direction/rotation more right.
+            if (direction == Vector3.Zero)
+            {
+                direction = new Vector3(0,0,1);
+            }
             _shots.Add(new Projectile(true) {Position = position, Rotation = Matrix.CreateTranslation(direction)});
+        }
+
+        public int GetNumberOfShots()
+        {
+            return _shots.Count;
         }
     }
 }

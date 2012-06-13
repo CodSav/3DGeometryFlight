@@ -58,6 +58,10 @@ namespace GreenChicken
             _registeredKeys[(int)GameKeyCodes.MOVE_FORWARD] = Keys.W;
             _registeredKeys[(int)GameKeyCodes.MOVE_BACKWARD] = Keys.S;
             _registeredKeys[(int)GameKeyCodes.FIRE] = Keys.Space;
+            _registeredKeys[(int)GameKeyCodes.SHOOT_DOWN] = Keys.K;
+            _registeredKeys[(int)GameKeyCodes.SHOOT_UP] = Keys.I;
+            _registeredKeys[(int)GameKeyCodes.SHOOT_LEFT] = Keys.J;
+            _registeredKeys[(int)GameKeyCodes.SHOOT_RIGHT] = Keys.L;
 
         }
 

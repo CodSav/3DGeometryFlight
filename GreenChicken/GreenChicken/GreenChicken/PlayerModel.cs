@@ -45,8 +45,36 @@ namespace GreenChicken
             {
                 playerPosition.Y -= PLAYER_SPEED;
             }
+
+            if (playerPosition.X > 200)
+            {
+                playerPosition.X = 200;
+            }
+            else if (playerPosition.X < -200)
+            {
+                playerPosition.X = -200;
+            }
+
+            if (playerPosition.Y > 200)
+            {
+                playerPosition.Y = 200;
+            }
+            else if (playerPosition.Y < -200)
+            {
+                playerPosition.Y = -200;
+            }
+
+            if (playerPosition.Z > 200)
+            {
+                playerPosition.Z = 200;
+            }
+            else if (playerPosition.Z < -200)
+            {
+                playerPosition.Z = -200;
+            }
+
             Position = playerPosition;
-            
+
 
             //TEMP ROTATION CODE TO TEST
             //TODO REMOVE
@@ -93,7 +121,7 @@ namespace GreenChicken
 
         protected override Matrix GetWorld()
         {
-            return _world * Rotation * Matrix.CreateTranslation(Position);
+            return _world*Rotation*Matrix.CreateTranslation(Position);
         }
 
         #endregion

@@ -47,6 +47,10 @@ namespace GreenChicken
             _spriteBatch.Begin();
 
             _spriteBatch.DrawString(_scoreFont, "Score: " + Score, new Vector2(10, 10), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            _spriteBatch.DrawString(_scoreFont, "X: " + Game1.GameInstance.Camera.Following.Position.X, new Vector2(10, 25), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            _spriteBatch.DrawString(_scoreFont, "Y: " + Game1.GameInstance.Camera.Following.Position.Y, new Vector2(10, 40), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            _spriteBatch.DrawString(_scoreFont, "Z: " + Game1.GameInstance.Camera.Following.Position.Z, new Vector2(10, 55), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            _spriteBatch.DrawString(_scoreFont, "Shots: " + Game1.GameInstance.BasicManager.GetNumberOfShots(), new Vector2(10, 70), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
 
             _spriteBatch.End();
 
