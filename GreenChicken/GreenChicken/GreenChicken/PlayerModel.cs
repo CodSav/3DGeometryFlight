@@ -1,18 +1,21 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace GreenChicken
 {
-    public class PlayerModel : BasicPrimitive
+    internal class PlayerModel : BasicPrimitive
     {
         private const float PLAYER_SPEED = 1.5f;
-        private readonly InputManager _inputManager;
+        private readonly InputManager inputManager;
+
+        private int rotateCount = 0;
 
         public PlayerModel(bool isCollidable = true)
         {
             IsCollidable = isCollidable;
-            _inputManager = InputManager.GetInstance();
+            inputManager = InputManager.GetInstance();
             LoadPrimitive();
         }
 
@@ -37,54 +40,49 @@ namespace GreenChicken
                 playerPosition += Rotation.Backward * PLAYER_SPEED;
             }
 
-            if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_UP))
+        private void PlayerGetInput()
+        {
+            bool move = false;
+            if (inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_LEFT))
             {
                 playerPosition += Rotation.Up * PLAYER_SPEED;
             }
-            else if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_DOWN))
+            if (inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_RIGHT))
             {
                 playerPosition += Rotation.Down * PLAYER_SPEED;
             }
+            if (inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_UP))
+            {
+                Rotation *= Matrix.CreateRotationX(MathHelper.ToRadians(-2));
+            }if (inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_DOWN))
+            {
+                Rotation *= Matrix.CreateRotationX(MathHelper.ToRadians(2));
+            }
+            if ( inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_FORWARD))
+                Position += Rotation.Backward* PLAYER_SPEED;
+            else if(inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_BACKWARD))
+                Position -= Rotation.Backward * PLAYER_SPEED;
+        }
 
-            if (playerPosition.X > 200)
-            {
-                playerPosition.X = 200;
-            }
-            else if (playerPosition.X < -200)
-            {
-                playerPosition.X = -200;
-            }
+        private void OldMovement()
+        {
+            bool move = false;
+            Vector3 _playerPosition = Position;
+            
 
-            if (playerPosition.Y > 200)
-            {
-                playerPosition.Y = 200;
-            }
-            else if (playerPosition.Y < -200)
-            {
-                playerPosition.Y = -200;
-            }
-
-            if (playerPosition.Z > 200)
-            {
-                playerPosition.Z = 200;
-            }
-            else if (playerPosition.Z < -200)
-            {
-                playerPosition.Z = -200;
-            }
-
-            Position = playerPosition;
+            _playerPosition = Rotation.Backward * -PLAYER_SPEED;
+            Position += _playerPosition;
 
 
             //TEMP ROTATION CODE TO TEST
             //TODO REMOVE
             KeyboardState keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.Z))
-                Rotation *= Matrix.CreateRotationZ(MathHelper.PiOver4/60);
+                Rotation = Matrix.CreateRotationZ(MathHelper.ToRadians(90));
             if (keyboardState.IsKeyDown(Keys.X))
-                Rotation *= Matrix.CreateRotationY(MathHelper.PiOver4/60);
+                Rotation *= Matrix.CreateRotationY(MathHelper.PiOver4 / 60);
             if (keyboardState.IsKeyDown(Keys.C))
-                Rotation *= Matrix.CreateRotationX(MathHelper.PiOver4/60);
+                Rotation *= Matrix.CreateRotationX(MathHelper.PiOver4 / 60);
         }
 
         #region Overrides of BasicPrimitive
@@ -121,7 +119,7 @@ namespace GreenChicken
 
         protected override Matrix GetWorld()
         {
-            return _world*Rotation*Matrix.CreateTranslation(Position);
+            return _world * Rotation * Matrix.CreateTranslation(Position);
         }
 
         #endregion
