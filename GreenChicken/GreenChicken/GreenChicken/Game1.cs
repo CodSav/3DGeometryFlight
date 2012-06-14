@@ -15,6 +15,7 @@ namespace GreenChicken
         public StateManager StateManager;
         public Overlay Overlay;
         public BloomComponent bloom;
+        public CollisionManager CollisionManager;
 
         private const float PROJECTILE_SPEED = 3;
         private const int PROJECTILE_DELAY = 108;
@@ -37,19 +38,18 @@ namespace GreenChicken
 
         protected override void Initialize()
         {
+            CollisionManager = CollisionManager.GetInstance(this);
             InputManager = InputManager.GetInstance(this);
-            Components.Add(InputManager);
-
             BasicManager = BasicManager.GetInstance(this);
-            Components.Add(BasicManager);
-
             bloom = new BloomComponent(this);
-            Components.Add(bloom);
-
             Overlay = new Overlay(this);
-            Components.Add(Overlay);
-
             Camera = new Camera(this);
+
+            Components.Add(InputManager);
+            Components.Add(BasicManager);
+            Components.Add(CollisionManager);
+            Components.Add(bloom);
+            Components.Add(Overlay);
             Components.Add(Camera);
 
             base.Initialize();
