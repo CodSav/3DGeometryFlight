@@ -15,6 +15,8 @@ namespace GreenChicken
         public BasicManager BasicManager;
         public StateManager StateManager;
         public Overlay Overlay;
+        public BloomComponent bloom;
+        public CollisionManager CollisionManager;
 
         AudioEngine _audioEngine;
         WaveBank _waveBank;
@@ -24,27 +26,36 @@ namespace GreenChicken
         private const float PROJECTILE_SPEED = 3;
         private const int PROJECTILE_DELAY = 108;
         private int _projectileCountdown;
+        private int PreferredBackBufferWidth = 1920;
+        private int PreferredBackBufferHeight = 1200;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             GameInstance = this;
+            //graphics.PreferredBackBufferWidth = PreferredBackBufferWidth;
+            //graphics.PreferredBackBufferHeight = PreferredBackBufferHeight;
+            //graphics.IsFullScreen = true;
+
         }
 
         public Camera Camera { get; set; }
 
         protected override void Initialize()
         {
+            CollisionManager = CollisionManager.GetInstance(this);
             InputManager = InputManager.GetInstance(this);
-            Components.Add(InputManager);
-
             BasicManager = BasicManager.GetInstance(this);
-            Components.Add(BasicManager);
+            bloom = new BloomComponent(this);
             Overlay = new Overlay(this);
-            Components.Add(Overlay);
-
             Camera = new Camera(this);
+
+            Components.Add(InputManager);
+            Components.Add(BasicManager);
+            Components.Add(CollisionManager);
+            Components.Add(bloom);
+            Components.Add(Overlay);
             Components.Add(Camera);
 
             base.Initialize();
@@ -88,6 +99,7 @@ namespace GreenChicken
 
         protected override void Draw(GameTime gameTime)
         {
+            bloom.BeginDraw();
             GraphicsDevice.Clear(Color.Black);
             GraphicsDevice.RasterizerState = new RasterizerState {CullMode = CullMode.None};
 
@@ -107,25 +119,33 @@ namespace GreenChicken
                 if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_UP)) || Mouse.GetState().MiddleButton == ButtonState.Pressed || 
                     (Mouse.GetState().RightButton == ButtonState.Pressed && Mouse.GetState().LeftButton == ButtonState.Pressed))
                 {
-                    BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Backward*PROJECTILE_SPEED);
+                    BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Backward*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
                     _soundBank.PlayCue("phasers");
                 }
                 else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_LEFT)) || Mouse.GetState().LeftButton == ButtonState.Pressed)
                 {
+<<<<<<< HEAD
                     BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Right*PROJECTILE_SPEED);
+=======
+                    BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Forward*PROJECTILE_SPEED);
+>>>>>>> 2fe0619913de928a3fa32f1fec198c8b73ff62d2
                     _projectileCountdown = PROJECTILE_DELAY;
                     _soundBank.PlayCue("phasers");
                 }
                 else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_DOWN)))
                 {
+<<<<<<< HEAD
                     BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Forward*PROJECTILE_SPEED);
+=======
+                    BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Right*PROJECTILE_SPEED);
+>>>>>>> 2fe0619913de928a3fa32f1fec198c8b73ff62d2
                     _projectileCountdown = PROJECTILE_DELAY;
                     _soundBank.PlayCue("phasers");
                 }
                 else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_RIGHT)) || Mouse.GetState().RightButton == ButtonState.Pressed)
                 {
-                    BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Left*PROJECTILE_SPEED);
+                    BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Left*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
                     _soundBank.PlayCue("phasers");
                 }

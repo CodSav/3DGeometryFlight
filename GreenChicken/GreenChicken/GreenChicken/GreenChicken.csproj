@@ -109,6 +109,8 @@
   <ItemGroup>
     <Compile Include="Basic.cs" />
     <Compile Include="BasicPrimitive.cs" />
+    <Compile Include="BasicPrimitiveSettings.cs" />
+    <Compile Include="BloomComponent.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="CollisionManager.cs" />
     <Compile Include="InputManager.cs" />

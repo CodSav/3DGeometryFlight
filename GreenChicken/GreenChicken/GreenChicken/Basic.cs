@@ -70,9 +70,9 @@ namespace GreenChicken
 
         #region Rotation
 
-        public Matrix Rotation { get { return _rotation; } set { _rotation = value; } }
+        public Quaternion Rotation { get { return _rotation; } set { _rotation = value; } }
 
-        protected Matrix _rotation = Matrix.Identity;
+        protected Quaternion _rotation = Quaternion.Identity;
 
         #endregion
 

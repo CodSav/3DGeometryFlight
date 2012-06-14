@@ -43,6 +43,7 @@ namespace GreenChicken
 
         public override void Draw(GameTime gameTime)
         {
+            Game1.GameInstance.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             DrawBasic();
             DrawShots();
             base.Draw(gameTime);

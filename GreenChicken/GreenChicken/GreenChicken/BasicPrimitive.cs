@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,10 +18,10 @@ namespace GreenChicken
     {
         #region Vertex Data
 
-        protected BasicPrimitive()
-        {
-            effect = new BasicEffect(Game1.GameInstance.GraphicsDevice);
-        }
+        public static Dictionary<string, BasicPrimitiveSettings> Settings =
+            new Dictionary<string, BasicPrimitiveSettings>();
+
+        private static BasicEffect effect;
 
         protected VertexPositionColorTexture[] ColorTextureVerts;
         protected VertexPositionColor[] ColorVerts;
@@ -34,7 +35,6 @@ namespace GreenChicken
         protected int VertexOffset;
         protected float _boundingSphereSize;
         protected int _primitiveCount;
-        private BasicEffect effect;
 
         protected int PrimitiveCount
         {
@@ -87,6 +87,16 @@ namespace GreenChicken
 
         protected void LoadPrimitive()
         {
+            if (IsCollidable)
+                CollisionManager.GetInstance(null).AddToCollidables(this);
+            string className = GetType().Name;
+
+            if (Settings.ContainsKey(className))
+            {
+                LoadSettings(className);
+                return;
+            }
+
             CreateVertexArray();
             _boundingSphereSize = GetLargestDistance();
             switch (Format)
@@ -114,11 +124,42 @@ namespace GreenChicken
                     VertexBuffer.SetData(TextureVerts);
                     break;
             }
-            var buffers = Game1.GameInstance.GraphicsDevice.GetVertexBuffers();
-            var bufferSize = buffers.Length;
+            VertexBufferBinding[] buffers = Game1.GameInstance.GraphicsDevice.GetVertexBuffers();
+            int bufferSize = buffers.Length;
             Array.Resize(ref buffers, bufferSize + 1);
             buffers[bufferSize] = VertexBuffer;
             effect = new BasicEffect(Game1.GameInstance.GraphicsDevice);
+
+            SaveSettings(className);
+        }
+
+        private void SaveSettings(string className)
+        {
+            var s = new BasicPrimitiveSettings
+                        {
+                            ColorTextureVerts = ColorTextureVerts,
+                            ColorVerts = ColorVerts,
+                            Format = Format,
+                            NormalTextureVerts = NormalTextureVerts,
+                            TextureVerts = TextureVerts,
+                            Type = Type,
+                            VertexBuffer = VertexBuffer,
+                            VertexOffset = VertexOffset
+                        };
+            Settings.Add(className, s);
+        }
+
+        private void LoadSettings(string className)
+        {
+            BasicPrimitiveSettings s = Settings[className];
+            ColorTextureVerts = s.ColorTextureVerts;
+            ColorVerts = s.ColorVerts;
+            Format = s.Format;
+            NormalTextureVerts = s.NormalTextureVerts;
+            TextureVerts = s.TextureVerts;
+            Type = s.Type;
+            VertexBuffer = s.VertexBuffer;
+            VertexOffset = s.VertexOffset;
         }
 
         protected abstract void CreateVertexArray();
@@ -131,23 +172,23 @@ namespace GreenChicken
             {
                 case PrimitiveFormat.Color:
                     longest =
-                        ColorVerts.Select(v => Vector3.Distance(Vector3.Zero, v.Position)).Concat(new[] {longest}).Max();
+                        ColorVerts.Select(v => Vector3.Distance(Position, v.Position)).Concat(new[] {longest}).Max()/2;
                     break;
                 case PrimitiveFormat.ColorTexture:
                     longest =
-                        ColorTextureVerts.Select(v => Vector3.Distance(Vector3.Zero, v.Position)).Concat(new[] {longest})
-                            .Max();
+                        ColorTextureVerts.Select(v => Vector3.Distance(Position, v.Position)).Concat(new[] {longest})
+                            .Max()/2;
                     break;
                 case PrimitiveFormat.NormalTexture:
                     longest =
-                        NormalTextureVerts.Select(v => Vector3.Distance(Vector3.Zero, v.Position)).Concat(new[]
-                                                                                                              {longest})
-                            .Max();
+                        NormalTextureVerts.Select(v => Vector3.Distance(Position, v.Position)).Concat(new[]
+                                                                                                          {longest})
+                            .Max()/2;
                     break;
                 case PrimitiveFormat.Texture:
                     longest =
-                        TextureVerts.Select(v => Vector3.Distance(Vector3.Zero, v.Position)).Concat(new[] {longest}).Max
-                            ();
+                        TextureVerts.Select(v => Vector3.Distance(Position, v.Position)).Concat(new[] {longest}).Max
+                            ()/2;
                     break;
             }
 
@@ -161,7 +202,7 @@ namespace GreenChicken
         public override void Draw(Camera camera)
         {
             Game1.GameInstance.GraphicsDevice.SetVertexBuffer(VertexBuffer);
-            
+
 
             effect.World = World;
             effect.View = camera.View;
@@ -195,7 +236,7 @@ namespace GreenChicken
 
         protected override BoundingSphere GetBoundingSphere()
         {
-            return new BoundingSphere(Vector3.Zero,_boundingSphereSize );
+            return new BoundingSphere(Position, _boundingSphereSize);
         }
 
         #endregion

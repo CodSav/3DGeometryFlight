@@ -27,7 +27,7 @@ namespace GreenChicken
 
         public override void Update()
         {
-            Rotation *= Matrix.CreateFromYawPitchRoll(_yawAngle, _pitchAngle, _rollAngle);
+            Rotation *= Quaternion.CreateFromYawPitchRoll(_yawAngle, _pitchAngle, _rollAngle);
 
             World *= Matrix.CreateTranslation(_direction);
         }
