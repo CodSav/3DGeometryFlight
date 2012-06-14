@@ -54,8 +54,8 @@ namespace GreenChicken
         private void RegisterKeys()
         {
             // TODO: Construct any child components here
-            _registeredKeys[(int) GameKeyCodes.MOVE_LEFT] = Keys.Left;
-            _registeredKeys[(int) GameKeyCodes.MOVE_RIGHT] = Keys.Right;
+            _registeredKeys[(int) GameKeyCodes.MOVE_LEFT] = Keys.A;
+            _registeredKeys[(int) GameKeyCodes.MOVE_RIGHT] = Keys.D;
             _registeredKeys[(int) GameKeyCodes.MOVE_UP] = Keys.Up;
             _registeredKeys[(int) GameKeyCodes.MOVE_DOWN] = Keys.Down;
             _registeredKeys[(int) GameKeyCodes.MOVE_FORWARD] = Keys.W;
