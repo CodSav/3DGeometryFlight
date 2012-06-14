@@ -14,16 +14,23 @@ namespace GreenChicken
         public BasicManager BasicManager;
         public StateManager StateManager;
         public Overlay Overlay;
+        public BloomComponent bloom;
 
         private const float PROJECTILE_SPEED = 3;
         private const int PROJECTILE_DELAY = 108;
         private int _projectileCountdown;
+        private int PreferredBackBufferWidth = 1920;
+        private int PreferredBackBufferHeight = 1200;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             GameInstance = this;
+            graphics.PreferredBackBufferWidth = PreferredBackBufferWidth;
+            graphics.PreferredBackBufferHeight = PreferredBackBufferHeight;
+            graphics.IsFullScreen = true;
+
         }
 
         public Camera Camera { get; set; }
@@ -35,6 +42,10 @@ namespace GreenChicken
 
             BasicManager = BasicManager.GetInstance(this);
             Components.Add(BasicManager);
+
+            bloom = new BloomComponent(this);
+            Components.Add(bloom);
+
             Overlay = new Overlay(this);
             Components.Add(Overlay);
 
@@ -73,6 +84,7 @@ namespace GreenChicken
 
         protected override void Draw(GameTime gameTime)
         {
+            bloom.BeginDraw();
             GraphicsDevice.Clear(Color.Black);
             GraphicsDevice.RasterizerState = new RasterizerState {CullMode = CullMode.None};
 
