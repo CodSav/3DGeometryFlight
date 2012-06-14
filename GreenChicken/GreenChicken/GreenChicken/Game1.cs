@@ -125,21 +125,13 @@ namespace GreenChicken
                 }
                 else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_LEFT)) || Mouse.GetState().LeftButton == ButtonState.Pressed)
                 {
-<<<<<<< HEAD
-                    BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Right*PROJECTILE_SPEED);
-=======
                     BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Forward*PROJECTILE_SPEED);
->>>>>>> 2fe0619913de928a3fa32f1fec198c8b73ff62d2
                     _projectileCountdown = PROJECTILE_DELAY;
                     _soundBank.PlayCue("phasers");
                 }
                 else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_DOWN)))
                 {
-<<<<<<< HEAD
-                    BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Forward*PROJECTILE_SPEED);
-=======
                     BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Right*PROJECTILE_SPEED);
->>>>>>> 2fe0619913de928a3fa32f1fec198c8b73ff62d2
                     _projectileCountdown = PROJECTILE_DELAY;
                     _soundBank.PlayCue("phasers");
                 }
