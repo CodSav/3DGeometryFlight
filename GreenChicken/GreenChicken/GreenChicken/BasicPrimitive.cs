@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,11 +18,7 @@ namespace GreenChicken
     {
         #region Vertex Data
 
-        protected BasicPrimitive()
-        {
-            effect = new BasicEffect(Game1.GameInstance.GraphicsDevice);
-        }
-
+        public static Dictionary<string,BasicPrimitiveSettings> Settings = new Dictionary<string, BasicPrimitiveSettings>();
         protected VertexPositionColorTexture[] ColorTextureVerts;
         protected VertexPositionColor[] ColorVerts;
         protected PrimitiveFormat Format = PrimitiveFormat.Color;
@@ -34,7 +31,7 @@ namespace GreenChicken
         protected int VertexOffset;
         protected float _boundingSphereSize;
         protected int _primitiveCount;
-        private BasicEffect effect;
+        private static BasicEffect effect;
 
         protected int PrimitiveCount
         {
@@ -87,6 +84,14 @@ namespace GreenChicken
 
         protected void LoadPrimitive()
         {
+            var className = this.GetType().Name;
+
+            if(Settings.ContainsKey(className))
+            {
+                LoadSettings(className);
+                return;
+            }
+
             CreateVertexArray();
             _boundingSphereSize = GetLargestDistance();
             switch (Format)
@@ -119,6 +124,37 @@ namespace GreenChicken
             Array.Resize(ref buffers, bufferSize + 1);
             buffers[bufferSize] = VertexBuffer;
             effect = new BasicEffect(Game1.GameInstance.GraphicsDevice);
+
+            SaveSettings(className);
+        }
+
+        private void SaveSettings(string className)
+        {
+            var s = new BasicPrimitiveSettings
+                        {
+                            ColorTextureVerts = ColorTextureVerts, 
+                            ColorVerts = ColorVerts,
+                            Format = Format,
+                            NormalTextureVerts = NormalTextureVerts,
+                            TextureVerts = TextureVerts,
+                            Type = Type,
+                            VertexBuffer = VertexBuffer,
+                            VertexOffset = VertexOffset
+                        };
+            Settings.Add(className,s);
+        }
+
+        private void LoadSettings(string className)
+        {
+            var s = Settings[className];
+            ColorTextureVerts = s.ColorTextureVerts;
+            ColorVerts = s.ColorVerts;
+            Format = s.Format;
+            NormalTextureVerts = s.NormalTextureVerts;
+            TextureVerts = s.TextureVerts;
+            Type = s.Type;
+            VertexBuffer = s.VertexBuffer;
+            VertexOffset = s.VertexOffset;
         }
 
         protected abstract void CreateVertexArray();
