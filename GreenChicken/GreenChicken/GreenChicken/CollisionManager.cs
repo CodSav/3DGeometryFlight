@@ -37,6 +37,8 @@ namespace GreenChicken
         {
             foreach (Basic c in collidables)
             {
+                if(!c.IsCollidable)
+                    continue;
                 var collide = new ArrayList();
                 foreach (Basic c2 in collidables)
                 {
