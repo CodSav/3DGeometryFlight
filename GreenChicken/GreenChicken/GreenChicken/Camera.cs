@@ -40,7 +40,7 @@ namespace GreenChicken
 
         private void CreateLookAt()
         {
-            Matrix rotationMatrix = Following.Rotation;
+            Matrix rotationMatrix = Matrix.CreateFromQuaternion(Following.Rotation);
 
             Vector3 transformedReference =
                 Vector3.Transform(reference, rotationMatrix);

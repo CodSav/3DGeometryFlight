@@ -27,9 +27,9 @@ namespace GreenChicken
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             GameInstance = this;
-            graphics.PreferredBackBufferWidth = PreferredBackBufferWidth;
-            graphics.PreferredBackBufferHeight = PreferredBackBufferHeight;
-            graphics.IsFullScreen = true;
+            //graphics.PreferredBackBufferWidth = PreferredBackBufferWidth;
+            //graphics.PreferredBackBufferHeight = PreferredBackBufferHeight;
+            //graphics.IsFullScreen = true;
 
         }
 
@@ -103,22 +103,22 @@ namespace GreenChicken
             {
                 if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_UP)))
                 {
-                    BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Backward*PROJECTILE_SPEED);
+                    BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Backward*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
                 }
                 else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_DOWN)))
                 {
-                    BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Forward*PROJECTILE_SPEED);
+                    BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Forward*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
                 }
                 else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_LEFT)))
                 {
-                    BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Right*PROJECTILE_SPEED);
+                    BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Right*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
                 }
                 else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_RIGHT)))
                 {
-                    BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Left*PROJECTILE_SPEED);
+                    BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Left*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
                 }
             }

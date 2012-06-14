@@ -25,20 +25,20 @@ namespace GreenChicken
             Vector3 playerPosition = Position;
             if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_LEFT))
             {
-                playerPosition += Rotation.Right*PLAYER_SPEED;
+                playerPosition += Matrix.CreateFromQuaternion(Rotation).Right*PLAYER_SPEED;
             }
             else if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_RIGHT))
             {
-                playerPosition += Rotation.Left*PLAYER_SPEED;
+                playerPosition += Matrix.CreateFromQuaternion(Rotation).Left*PLAYER_SPEED;
             }
 
             if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_BACKWARD))
             {
-                playerPosition += Rotation.Forward*PLAYER_SPEED;
+                playerPosition += Matrix.CreateFromQuaternion(Rotation).Forward*PLAYER_SPEED;
             }
             else if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_FORWARD))
             {
-                playerPosition += Rotation.Backward*PLAYER_SPEED;
+                playerPosition += Matrix.CreateFromQuaternion(Rotation).Backward*PLAYER_SPEED;
             }
 
             if (playerPosition.X > 200)
@@ -74,8 +74,8 @@ namespace GreenChicken
             float angleX = (prevMouseState.X - currentMouseState.X)*0.005f;
             float angleY = (prevMouseState.Y - currentMouseState.Y)*0.005f;
 
-            Rotation *= Matrix.CreateFromAxisAngle(Rotation.Up, angleX);
-            Rotation *= Matrix.CreateFromAxisAngle(Rotation.Left, angleY);
+            Rotation *= Quaternion.CreateFromAxisAngle(Vector3.Up, angleX);
+            Rotation *= Quaternion.CreateFromAxisAngle(Vector3.Left, angleY);
 
             prevMouseState = currentMouseState;
         }
@@ -114,7 +114,7 @@ namespace GreenChicken
 
         protected override Matrix GetWorld()
         {
-            return _world*Rotation*Matrix.CreateTranslation(Position);
+            return _world*Matrix.CreateFromQuaternion(Rotation)*Matrix.CreateTranslation(Position);
         }
 
         #endregion
