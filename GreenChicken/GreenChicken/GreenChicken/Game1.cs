@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -14,6 +15,11 @@ namespace GreenChicken
         public BasicManager BasicManager;
         public StateManager StateManager;
         public Overlay Overlay;
+
+        AudioEngine _audioEngine;
+        WaveBank _waveBank;
+        SoundBank _soundBank;
+        Cue _trackCue;
 
         private const float PROJECTILE_SPEED = 3;
         private const int PROJECTILE_DELAY = 108;
@@ -46,6 +52,10 @@ namespace GreenChicken
 
         protected override void LoadContent()
         {
+            _audioEngine = new AudioEngine(@"Content\audio\GameAudio.xgs");
+            _waveBank = new WaveBank(_audioEngine, @"Content\audio\Wave Bank.xwb");
+            _soundBank = new SoundBank(_audioEngine, @"Content\audio\Sound Bank.xsb");
+
             var w = new WorldGrid();
             BasicManager.AddBasic(w);
 
@@ -56,6 +66,9 @@ namespace GreenChicken
             BasicManager.AddBasic(e);
 
             Camera.Following = p;
+
+            _trackCue = _soundBank.GetCue("music");
+            _trackCue.Play();
         }
 
         protected override void UnloadContent()
@@ -68,6 +81,8 @@ namespace GreenChicken
                 this.Exit();
 
             FireShots(gameTime);
+
+            _audioEngine.Update();
             base.Update(gameTime);
         }
 
@@ -89,25 +104,30 @@ namespace GreenChicken
         {
             if (_projectileCountdown <= 0)
             {
-                if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_UP)))
+                if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_UP)) || Mouse.GetState().MiddleButton == ButtonState.Pressed || 
+                    (Mouse.GetState().RightButton == ButtonState.Pressed && Mouse.GetState().LeftButton == ButtonState.Pressed))
                 {
                     BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Backward*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
+                    _soundBank.PlayCue("phasers");
+                }
+                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_LEFT)) || Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Right*PROJECTILE_SPEED);
+                    _projectileCountdown = PROJECTILE_DELAY;
+                    _soundBank.PlayCue("phasers");
                 }
                 else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_DOWN)))
                 {
                     BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Forward*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
+                    _soundBank.PlayCue("phasers");
                 }
-                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_LEFT)))
-                {
-                    BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Right*PROJECTILE_SPEED);
-                    _projectileCountdown = PROJECTILE_DELAY;
-                }
-                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_RIGHT)))
+                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_RIGHT)) || Mouse.GetState().RightButton == ButtonState.Pressed)
                 {
                     BasicManager.AddShot(Camera.Following.Position, Camera.Following.Rotation.Left*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
+                    _soundBank.PlayCue("phasers");
                 }
             }
             else

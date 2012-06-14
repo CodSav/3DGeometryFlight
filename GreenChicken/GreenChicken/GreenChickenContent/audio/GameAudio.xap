@@ -225,8 +225,8 @@ Wave Bank
     Windows Bank Path Edited = 0;
     Seek Tables = 1;
     Compression Preset Name = <none>;
-    Bank Last Revised Low = 1706049688;
-    Bank Last Revised High = 30230502;
+    Bank Last Revised Low = 2076906148;
+    Bank Last Revised High = 30230982;
 
     Wave
     {
@@ -296,6 +296,52 @@ Wave Bank
             Last Modified High = 30230502;
         }
     }
+
+    Wave
+    {
+        Name = The Path You Travel;
+        File = The Path You Travel.wav;
+        Build Settings Last Modified Low = 1874994599;
+        Build Settings Last Modified High = 30230982;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 44;
+            Play Region Length = 24196608;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 1133952214;
+            Last Modified High = 30230982;
+        }
+    }
+
+    Wave
+    {
+        Name = Wireless Menu;
+        File = Wireless Menu.wav;
+        Build Settings Last Modified Low = 1875004600;
+        Build Settings Last Modified High = 30230982;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 44;
+            Play Region Length = 15989760;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 1156523505;
+            Last Modified High = 30230982;
+        }
+    }
 }
 
 Sound Bank
@@ -305,13 +351,11 @@ Sound Bank
     Windows File = Win\Sound Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Header Last Modified High = 0;
-    Header Last Modified Low = 0;
 
     Sound
     {
         Name = phasers;
-        Volume = -1200;
+        Volume = -2030;
         Pitch = 0;
         Priority = 0;
 
@@ -449,6 +493,102 @@ Sound Bank
         }
     }
 
+    Sound
+    {
+        Name = Wireless Menu;
+        Volume = -1200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Loop Count = 255;
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = Wave Bank;
+                    Bank Index = 0;
+                    Entry Name = Wireless Menu;
+                    Entry Index = 4;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
+    Sound
+    {
+        Name = The Path You Travel;
+        Volume = -1200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Loop Count = 255;
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = Wave Bank;
+                    Bank Index = 0;
+                    Entry Name = The Path You Travel;
+                    Entry Index = 3;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
     Cue
     {
         Name = phasers;
@@ -471,7 +611,7 @@ Sound Bank
 
     Cue
     {
-        Name = bomb1;
+        Name = enemyHit;
 
         Variation
         {
@@ -487,11 +627,19 @@ Sound Bank
             Weight Min = 0;
             Weight Max = 255;
         }
+
+        Sound Entry
+        {
+            Name = bomb2;
+            Index = 2;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
     }
 
     Cue
     {
-        Name = bomb2;
+        Name = music;
 
         Variation
         {
@@ -502,8 +650,16 @@ Sound Bank
 
         Sound Entry
         {
-            Name = bomb2;
-            Index = 2;
+            Name = Wireless Menu;
+            Index = 3;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+
+        Sound Entry
+        {
+            Name = The Path You Travel;
+            Index = 4;
             Weight Min = 0;
             Weight Max = 255;
         }
