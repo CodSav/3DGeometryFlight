@@ -21,12 +21,12 @@ namespace GreenChicken
         RenderTarget2D renderTarget1;
         RenderTarget2D renderTarget2;
 
-        public readonly float BloomThreshold = 0.1f;
-        public readonly float BlurAmount = 1;
-        public readonly float BloomIntensity = 5;
-        public readonly float BaseIntensity = 0.2f;
-        public readonly float BloomSaturation = 1;
-        public readonly float BaseSaturation = 0.1f;
+        public float BloomThreshold = 0.1f;
+        public float BlurAmount = 2;
+        public float BloomIntensity = 5;
+        public float BaseIntensity = 0.2f;
+        public float BloomSaturation = 1;
+        public float BaseSaturation = 0.1f;
         
         // Optionally displays one of the intermediate buffers used
         // by the bloom postprocess, so you can see exactly what is

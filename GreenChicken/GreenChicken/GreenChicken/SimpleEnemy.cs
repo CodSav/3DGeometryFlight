@@ -11,24 +11,10 @@ namespace GreenChicken
             LoadPrimitive();
         }
 
-        #region Overrides of Basic
-
-        public override void CollidesWith(Basic b)
-        {
-            //TODO
-        }
-
-        public override void Update()
-        {
-        }
-
-        #endregion
-
         #region Overrides of BasicPrimitive
 
         protected override void CreateVertexArray()
         {
-
             Type = PrimitiveType.TriangleStrip;
             ColorVerts = new VertexPositionColor[5];
             ColorVerts[0] = new VertexPositionColor(new Vector3(2, 2, 0), Color.BlueViolet);

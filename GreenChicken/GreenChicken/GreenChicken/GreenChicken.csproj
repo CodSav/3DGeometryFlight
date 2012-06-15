@@ -113,7 +113,9 @@
     <Compile Include="BloomComponent.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="CollisionManager.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="InputManager.cs" />
+    <Compile Include="ModelEnemy.cs" />
     <Compile Include="Overlay.cs" />
     <Compile Include="PlayerModel.cs" />
     <Compile Include="BasicManager.cs" />
@@ -122,7 +124,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="SimpleEnemy.cs" />
-    <Compile Include="State.cs" />
+    <Compile Include="States\State.cs" />
     <Compile Include="StateManager.cs" />
     <Compile Include="States\BeginState.cs" />
     <Compile Include="States\EndState.cs" />
@@ -170,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\x86\Debug\Content\README" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="obj\x86\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\x86\Debug\TempPE\README" />
   </ItemGroup>

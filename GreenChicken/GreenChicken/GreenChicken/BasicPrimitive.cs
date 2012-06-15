@@ -14,7 +14,7 @@ namespace GreenChicken
         Texture
     }
 
-    public abstract class BasicPrimitive : Basic
+    public abstract class BasicPrimitive : Enemy
     {
         #region Vertex Data
 

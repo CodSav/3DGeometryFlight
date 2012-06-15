@@ -29,11 +29,11 @@ namespace GreenChicken
 
         public override void CollidesWith(Basic b)
         {
-            if (b.GetType().Name == "SimpleEnemy")
+            if (b.GetType().Name == "SimpleEnemy" || b.GetType().Name == "ModelEnemy")
             {
                 Console.WriteLine("ouch" + ouch++);
-                //CollisionManager.GetInstance(null).RemoveFromCollidables(this);
-                //BasicManager.GetInstance(null).RemoveFromShots(this);
+                CollisionManager.GetInstance(null).RemoveFromCollidables(this);
+                BasicManager.GetInstance(null).RemoveFromShots(this);
             }
         }
 

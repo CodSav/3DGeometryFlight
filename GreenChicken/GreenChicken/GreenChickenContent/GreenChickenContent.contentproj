@@ -103,6 +103,30 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Cube.fbx">
+      <Name>Cube</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\Dodeca.fbx">
+      <Name>Dodeca</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Cube_EMS.tga">
+      <Name>Cube_EMS</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\Dodeca_EMS.tga">
+      <Name>Dodeca_EMS</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="fonts\titleFont.spritefont">
       <Name>titleFont</Name>
       <Importer>FontDescriptionImporter</Importer>

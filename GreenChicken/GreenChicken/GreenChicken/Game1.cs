@@ -81,6 +81,9 @@ namespace GreenChicken
             var p = new PlayerModel{Position = new Vector3(0,0,0)};
             BasicManager.AddBasic(p);
 
+            var e2 = new ModelEnemy(1.0f, Content.Load<Model>(@"Models\Dodeca")) { Position = new Vector3(-100, 2, 10) };
+            BasicManager.AddBasic(e2);
+
             var e = new SimpleEnemy {Position = new Vector3(-10, 2, 10)};
             BasicManager.AddBasic(e);
 

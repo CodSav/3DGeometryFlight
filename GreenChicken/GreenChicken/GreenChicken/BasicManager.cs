@@ -33,6 +33,11 @@ namespace GreenChicken
             _shots.Remove(b);
         }
 
+        public void RemoveFromBasic(Basic b)
+        {
+            _basicObjects.Remove(b);
+        }
+
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
