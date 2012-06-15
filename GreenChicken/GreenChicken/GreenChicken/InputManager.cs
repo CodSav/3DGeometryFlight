@@ -24,7 +24,8 @@ namespace GreenChicken
             FIRE = 10,
             BOMB = 11,
             PAUSE = 12,
-            QUIT = 13
+            QUIT = 13,
+            ENTER = 14
         }
 
         private readonly int _numOfKeys;
@@ -66,6 +67,8 @@ namespace GreenChicken
             _registeredKeys[(int) GameKeyCodes.SHOOT_LEFT] = Keys.J;
             _registeredKeys[(int) GameKeyCodes.SHOOT_RIGHT] = Keys.L;
             _registeredKeys[(int) GameKeyCodes.QUIT] = Keys.Escape;
+            _registeredKeys[(int) GameKeyCodes.ENTER] = Keys.Enter;
+            _registeredKeys[(int)GameKeyCodes.PAUSE] = Keys.P;
         }
 
         public static InputManager GetInstance(Game game)

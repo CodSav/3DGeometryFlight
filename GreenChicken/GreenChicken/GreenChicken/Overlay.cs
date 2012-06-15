@@ -54,12 +54,12 @@ namespace GreenChicken
             _spriteBatch.DrawString(_scoreFont, "Score: " + Score, new Vector2(10, 10), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
 
             //This is pretty ugly, but since there isn't really a way to use the states, it's the best I can do
-            if (StateManager.current.GetType() == new States.BeginState().GetType())
+            if (StateManager.CurrentState == StateManager.BeginState)
             {
-                _spriteBatch.DrawString(_titleFont, "GREEN CHICKEN", new Vector2(_gameBounds.Width / 3f, _gameBounds.Height / 3f), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                _spriteBatch.DrawString(_titleFont, "Some game or something", new Vector2(_gameBounds.Width / 3f, _gameBounds.Height / 3f), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
                 _spriteBatch.DrawString(_titleFont, "Press [ENTER] to play!", new Vector2(_gameBounds.Width / 3.5f, _gameBounds.Height / 2f), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             }
-            else if (StateManager.current.GetType() == new States.PlayState().GetType())
+            else if (StateManager.CurrentState == StateManager.PlayState)
             {
                     
             _spriteBatch.DrawString(_scoreFont, "Score: " + Score, new Vector2(10, 10), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
@@ -84,17 +84,18 @@ namespace GreenChicken
 //            _spriteBatch.DrawString(_scoreFont, Mouse.GetState().Y + ": MouseY", new Vector2(600, 85), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             #endregion
             }
-            else if (StateManager.current.GetType() == new States.PauseState().GetType())
+            else if (StateManager.CurrentState == StateManager.PauseState)
             {
                 _spriteBatch.DrawString(_scoreFont, "Score: " + Score, new Vector2(10, 10), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
                 _spriteBatch.DrawString(_titleFont, "PAUSED", new Vector2(_gameBounds.Width / 3f, _gameBounds.Height / 3f), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
-                _spriteBatch.DrawString(_titleFont, "Press [ENTER] to resume", new Vector2(_gameBounds.Width / 3.5f, _gameBounds.Height / 2f), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                _spriteBatch.DrawString(_titleFont, "Press PAUSE (P) to resume", new Vector2(_gameBounds.Width / 3.5f, _gameBounds.Height / 2f), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             }
-            else if (StateManager.current.GetType() == new States.EndState().GetType())
+            else if (StateManager.CurrentState == StateManager.EndState)
             {
                 _spriteBatch.DrawString(_titleFont, "GAME OVER", new Vector2(_gameBounds.Width / 3f, _gameBounds.Height / 3f), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
                 _spriteBatch.DrawString(_titleFont, "Final score: " + Score, new Vector2(_gameBounds.Width / 3f, _gameBounds.Height / 2f), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
-                _spriteBatch.DrawString(_titleFont, "Press [ENTER] to play again!", new Vector2(_gameBounds.Width / 3.5f, _gameBounds.Height / 3f * 2f), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                _spriteBatch.DrawString(_titleFont, "Press [ENTER] to play again!*", new Vector2(_gameBounds.Width / 3.5f, _gameBounds.Height / 3f * 2f), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                _spriteBatch.DrawString(_titleFont, "*If you rerun the project", new Vector2(0, _gameBounds.Height-50), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             }
 
             _spriteBatch.End();

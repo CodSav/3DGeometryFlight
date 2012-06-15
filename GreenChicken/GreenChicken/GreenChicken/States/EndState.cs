@@ -9,27 +9,30 @@ namespace GreenChicken.States
     {
         public override void Update(Microsoft.Xna.Framework.GameTime gt)
         {
-            throw new NotImplementedException();
+             Game1.GameInstance.Overlay.Update(gt);
+             if(InputManager.GetInstance(null).KeyPressed(InputManager.GameKeyCodes.ENTER))
+             {
+                 Game1.GameInstance.Exit();
+             }
         }
 
         public override void Draw(Microsoft.Xna.Framework.GameTime gt)
         {
-            throw new NotImplementedException();
+            Game1.GameInstance.Overlay.Draw(gt);
         }
 
         public override void Initiliaze()
         {
-            throw new NotImplementedException();
+            Game1.GameInstance.Overlay.Initialize();
+            CollisionManager.GetInstance(null).Initialize();
         }
 
         public override void LoadContent()
         {
-            throw new NotImplementedException();
         }
 
         public override void UnloadContent()
         {
-            throw new NotImplementedException();
         }
     }
 }

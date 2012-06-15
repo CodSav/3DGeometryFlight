@@ -8,7 +8,6 @@ namespace GreenChicken
     public class BasicManager : DrawableGameComponent
     {
         private readonly List<Basic> _basicObjects = new List<Basic>();
-        private SpriteBatch _spriteBatch;
         private static BasicManager _basicManager;
         private List<Basic> _shots = new List<Basic>();
         private const float SHOT_BOUND = 200;
@@ -40,7 +39,6 @@ namespace GreenChicken
 
         public new void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
             base.LoadContent();
         }
 

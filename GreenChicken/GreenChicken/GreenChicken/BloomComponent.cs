@@ -21,12 +21,12 @@ namespace GreenChicken
         RenderTarget2D renderTarget1;
         RenderTarget2D renderTarget2;
 
-        public float BloomThreshold = 0.1f;
-        public float BlurAmount = 2;
-        public float BloomIntensity = 5;
-        public float BaseIntensity = 0.2f;
-        public float BloomSaturation = 1;
-        public float BaseSaturation = 0.1f;
+        public float BloomThreshold = 0f;
+        public float BlurAmount = 2.0f;
+        public float BloomIntensity = 3;
+        public float BaseIntensity = 0.02f;
+        public float BloomSaturation = 3.0f;
+        public float BaseSaturation = 0.01f;
 
         public int toRender = 0; //Desaturate = 1;
         
@@ -49,7 +49,7 @@ namespace GreenChicken
         public void Desaturate()
         {
             if (BloomSaturation > 0)
-                BloomSaturation -= .01f;
+                BloomSaturation -= .05f;
         }
 
 
@@ -92,7 +92,7 @@ namespace GreenChicken
         /// <summary>
         /// Unload your graphics content.
         /// </summary>
-        protected override void UnloadContent()
+        public new void UnloadContent()
         {
             sceneRenderTarget.Dispose();
             renderTarget1.Dispose();

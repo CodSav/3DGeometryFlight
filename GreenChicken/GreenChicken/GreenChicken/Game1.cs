@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,6 +18,8 @@ namespace GreenChicken
         public Overlay Overlay;
         public BloomComponent bloom;
         public CollisionManager CollisionManager;
+        public SpriteBatch SpriteBatch;
+        public ParticleEngine ParticleEngine;
 
         public AudioEngine AudioEngine;
         public WaveBank WaveBank;
@@ -30,7 +33,9 @@ namespace GreenChicken
         private int PreferredBackBufferHeight = 1200;
 
         public readonly bool useBloom = true;
-        public readonly bool fullscreen = false;
+        public readonly bool fullscreen = true;
+        public bool gameover = false;
+        private int gameOverCount = 0;
 
         public Game1()
         {
@@ -55,7 +60,7 @@ namespace GreenChicken
 
             Overlay = new Overlay(this);
             Camera = new Camera(this);
-            StateManager = new StateManager(this);
+            StateManager = StateManager.GetInstance(this);
 
             Components.Add(InputManager);
             //Components.Add(BasicManager);
@@ -71,9 +76,15 @@ namespace GreenChicken
 
         protected override void LoadContent()
         {
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
             AudioEngine = new AudioEngine(@"Content\audio\GameAudio.xgs");
             WaveBank = new WaveBank(AudioEngine, @"Content\audio\Wave Bank.xwb");
             SoundBank = new SoundBank(AudioEngine, @"Content\audio\Sound Bank.xsb");
+            List<Texture2D> textures = new List<Texture2D>();
+            textures.Add(Content.Load<Texture2D>("circle"));
+            textures.Add(Content.Load<Texture2D>("star"));
+            textures.Add(Content.Load<Texture2D>("diamond"));
+            ParticleEngine = new ParticleEngine(textures, new Vector2(400, 240));
 
             var w = new WorldGrid();
             BasicManager.AddBasic(w);
@@ -170,6 +181,28 @@ namespace GreenChicken
             }
             else
                 _projectileCountdown -= gameTime.ElapsedGameTime.Milliseconds;
+        }
+
+        internal void BeginGameOver()
+        {
+            gameover = true;
+        }
+
+        public void GameOverUpdate()
+        {
+            if (gameOverCount++ < 200)
+            {
+                ParticleEngine.EmitterLocation = new Vector2(GraphicsDevice.Viewport.Bounds.Width/2,
+                                                             GraphicsDevice.Viewport.Bounds.Height/2);
+                ParticleEngine.Update();
+            }
+
+
+        }
+
+        public void GameOverDraw()
+        {
+            ParticleEngine.Draw(SpriteBatch);
         }
     }
 }

@@ -117,6 +117,7 @@
     <Compile Include="InputManager.cs" />
     <Compile Include="ModelEnemy.cs" />
     <Compile Include="Overlay.cs" />
+    <Compile Include="ParticleEngine.cs" />
     <Compile Include="PlayerModel.cs" />
     <Compile Include="BasicManager.cs" />
     <Compile Include="Projectile.cs" />

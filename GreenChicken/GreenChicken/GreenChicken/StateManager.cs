@@ -9,60 +9,58 @@ namespace GreenChicken
 {
     public class StateManager : DrawableGameComponent
     {
+        private static StateManager _sm;
+        public static PauseState PauseState = new PauseState();
+        public static PlayState PlayState = new PlayState();
+        public static EndState EndState = new EndState();
+        public static BeginState BeginState = new BeginState();
 
-        public static PauseState pause = new PauseState();
-        public static PlayState play = new PlayState();
-        public static EndState end = new EndState();
-        public static BeginState begin = new BeginState();
+        public static State CurrentState;
 
-        public static State current;
-
-
-        public StateManager(Game game) : base(game)
+        public static StateManager GetInstance(Game game)
         {
-            current = new PlayState();
-            
+            return _sm ?? (_sm = new StateManager(game));
         }
 
-        public void ChangeState()
-        {
 
+        private StateManager(Game game) : base(game)
+        {
+            CurrentState = BeginState;
+
+        }
+
+        public void ChangeState(State toState)
+        {
+            CurrentState = toState;
 
         }
 
         protected override void UnloadContent()
         {
-            current.UnloadContent();
+            CurrentState.UnloadContent();
         }
 
         public override void Initialize()
         {
-            current.Initiliaze();
+            CurrentState.Initiliaze();
         }
 
 
         public void StupidLoadContent()
         {
-            current.LoadContent();
+            CurrentState.LoadContent();
             
         }
 
         public override void Update(GameTime gt)
         {
-            //check if state has changed
-
-
-
-
-
-            current.Update(gt);
+            CurrentState.Update(gt);
 
         }
 
         public override void Draw(GameTime gt)
         {
-
-            current.Draw(gt);
+            CurrentState.Draw(gt);
         }
 
 

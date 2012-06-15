@@ -124,8 +124,11 @@ namespace GreenChicken
             {
                 CollisionManager.GetInstance(null).RemoveFromCollidables(this);
                 BasicManager.GetInstance(null).RemoveFromBasic(this);
+                Game1.GameInstance.bloom.toRender = 1;
+                Game1.GameInstance.TrackCue.Pause();
                 Game1.GameInstance.TrackCue.Stop(AudioStopOptions.Immediate);
                 Game1.GameInstance.SoundBank.PlayCue("die");
+                Game1.GameInstance.BeginGameOver();
             }
         }
 

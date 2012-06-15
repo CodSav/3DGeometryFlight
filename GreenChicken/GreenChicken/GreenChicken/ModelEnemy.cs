@@ -28,6 +28,7 @@ namespace GreenChicken
 
         public override void Draw(Camera camera)
         {
+            var old = Game1.GameInstance.GraphicsDevice.RasterizerState;
             Game1.GameInstance.GraphicsDevice.RasterizerState = new RasterizerState { FillMode = FillMode.WireFrame };
 
             effect.World = World;
@@ -47,6 +48,7 @@ namespace GreenChicken
                 }
                 mesh.Draw();
             }
+            Game1.GameInstance.GraphicsDevice.RasterizerState = old;
         }
 
         protected override BoundingSphere GetBoundingSphere()

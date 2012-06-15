@@ -19,10 +19,20 @@ namespace GreenChicken.States
             Game1.GameInstance.Overlay.Update(gt);
             CollisionManager.GetInstance(null).Update(gt);
 
+            if (Game1.GameInstance.gameover)
+            {
+                Game1.GameInstance.GameOverUpdate();
+            }
+
             if (Game1.GameInstance.useBloom)
             Game1.GameInstance.bloom.Update(gt);
 
             Game1.GameInstance.Camera.Update(gt);
+
+            if (InputManager.GetInstance(null).KeyPressed(InputManager.GameKeyCodes.PAUSE))
+            {
+                StateManager.GetInstance(null).ChangeState(StateManager.PauseState);
+            }
 
         }
 
@@ -34,10 +44,17 @@ namespace GreenChicken.States
 
             BasicManager.GetInstance(null).Draw(gt);
 
+            if (Game1.GameInstance.gameover)
+            {
+                Game1.GameInstance.GameOverDraw();
+            }
+
             if (Game1.GameInstance.useBloom)
             Game1.GameInstance.bloom.Draw(gt);
 
             Game1.GameInstance.Overlay.Draw(gt);
+
+            
 
 
         }
@@ -70,9 +87,6 @@ namespace GreenChicken.States
 
         public override void UnloadContent()
         {
-
-        
-        
         }
     }
 }
