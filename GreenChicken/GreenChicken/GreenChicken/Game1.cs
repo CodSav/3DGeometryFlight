@@ -33,9 +33,12 @@ namespace GreenChicken
         private int PreferredBackBufferHeight = 1200;
 
         public readonly bool useBloom = true;
-        public readonly bool fullscreen = true;
+        public readonly bool fullscreen = false;
         public bool gameover = false;
         private int gameOverCount = 0;
+        private int enemyCounter = 0;
+        private int difficulty = 100;
+        private int overTimeDifficulty = 200;
 
         public Game1()
         {
@@ -121,6 +124,33 @@ namespace GreenChicken
             base.Draw(gameTime);
         }
 
+        private void CreateRandomEnemies()
+        {
+            if(enemyCounter++ % (difficulty+overTimeDifficulty) == 0)
+            {
+                enemyCounter = 1;
+                Random gen = new Random();
+                var pos = new Vector3(gen.Next(-190, 190), gen.Next(-190, 190), gen.Next(-190, 190));
+                switch(gen.Next(0, 3))
+                {
+                    case 0:
+                        var e1 = new ModelEnemy(1.0f, Content.Load<Model>(@"Models\Cube")) { Position = pos};
+                        BasicManager.AddBasic(e1);
+                        break;
+                    case 1:
+                        var e2 = new ModelEnemy(1.0f, Content.Load<Model>(@"Models\Dodeca")) { Position = pos };
+                        BasicManager.AddBasic(e2);
+                        break;
+                    case 2:
+                        var e = new SimpleEnemy { Position = pos };
+                        BasicManager.AddBasic(e);
+                        break;
+                }
+                
+                overTimeDifficulty--;
+            }
+        }
+
 
         public void Update2(GameTime gameTime)
         {
@@ -128,6 +158,7 @@ namespace GreenChicken
                 this.Exit();
             
             FireShots(gameTime);
+            CreateRandomEnemies();
 
             AudioEngine.Update();
             //   base.Update(gameTime);

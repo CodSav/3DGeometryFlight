@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GreenChicken
@@ -10,6 +11,7 @@ namespace GreenChicken
         protected float _boundingSphereSize = 4.0f;
         protected float speed;
         protected Vector3 target;
+        protected Vector3 Color;
 
         public ModelEnemy(float spd, Model model, bool collidable = true)
         {
@@ -20,6 +22,8 @@ namespace GreenChicken
             speed = spd;
             if(effect == null)
                 effect = new BasicEffect(Game1.GameInstance.GraphicsDevice);
+            Random gen = new Random();
+            Color = new Vector3((float) gen.NextDouble(), (float) gen.NextDouble(), (float) gen.NextDouble());
         }
 
         public Model model { get; protected set; }
@@ -35,7 +39,8 @@ namespace GreenChicken
             effect.View = camera.View;
             effect.Projection = camera.Projection;
             effect.LightingEnabled = true;
-            effect.EmissiveColor = new Vector3(.7f, 0, 1);
+            
+            effect.EmissiveColor = Color;
             foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (ModelMeshPart mmp in mesh.MeshParts)
