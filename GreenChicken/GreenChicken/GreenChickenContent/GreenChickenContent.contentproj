@@ -158,18 +158,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="audio\Batman Punch.wav">
-      <Name>Batman Punch</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
     <Compile Include="audio\Sharp Punch.wav">
       <Name>Sharp Punch</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="audio\Strong Punch.wav">
       <Name>Strong Punch</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="audio\Batman Punch.wav">
+      <Name>Batman Punch</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>

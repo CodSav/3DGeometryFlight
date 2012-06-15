@@ -33,12 +33,12 @@ namespace GreenChicken
         private int PreferredBackBufferHeight = 1200;
 
         public readonly bool useBloom = true;
-        public readonly bool fullscreen = false;
+        public readonly bool fullscreen = true;
         public bool gameover = false;
         private int gameOverCount = 0;
         private int enemyCounter = 0;
         private int difficulty = 100;
-        private int overTimeDifficulty = 200;
+        private int overTimeDifficulty = 100;
 
         public Game1()
         {
