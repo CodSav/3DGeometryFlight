@@ -14,5 +14,20 @@ namespace GreenChicken.States
         public override void Draw(Microsoft.Xna.Framework.GameTime gt)
         {
         }
+
+        public override void Initiliaze()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void LoadContent()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UnloadContent()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

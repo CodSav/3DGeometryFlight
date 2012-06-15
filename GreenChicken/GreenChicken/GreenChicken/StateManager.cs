@@ -21,12 +21,30 @@ namespace GreenChicken
         public StateManager(Game game) : base(game)
         {
             current = new PlayState();
+            
         }
 
         public void ChangeState()
         {
 
 
+        }
+
+        protected override void UnloadContent()
+        {
+            current.UnloadContent();
+        }
+
+        public override void Initialize()
+        {
+            current.Initiliaze();
+        }
+
+
+        public void StupidLoadContent()
+        {
+            current.LoadContent();
+            
         }
 
         public override void Update(GameTime gt)
@@ -44,7 +62,7 @@ namespace GreenChicken
         public override void Draw(GameTime gt)
         {
 
-
+            current.Draw(gt);
         }
 
 

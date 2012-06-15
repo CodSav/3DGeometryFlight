@@ -16,5 +16,20 @@ namespace GreenChicken.States
         {
             throw new NotImplementedException();
         }
+
+        public override void Initiliaze()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void LoadContent()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UnloadContent()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

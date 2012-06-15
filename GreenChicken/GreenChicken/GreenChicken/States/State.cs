@@ -13,6 +13,10 @@ namespace GreenChicken
 
         public abstract void Update(GameTime gt);
 
+        public abstract void Initiliaze();
+        public abstract void LoadContent();
+        public abstract void UnloadContent();
+
         public abstract void Draw(GameTime gt);
     }
 }
