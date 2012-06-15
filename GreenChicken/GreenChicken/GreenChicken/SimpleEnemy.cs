@@ -28,6 +28,8 @@ namespace GreenChicken
                     moveType = MoveType.Simple3;
                     break;
                 case 5:
+                case 6:
+                case 7:
                     moveType = MoveType.Follow;
                     break;
             }

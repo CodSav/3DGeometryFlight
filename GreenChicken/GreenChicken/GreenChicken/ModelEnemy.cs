@@ -8,13 +8,12 @@ namespace GreenChicken
     {
         public static PlayerModel player;
         private static BasicEffect effect;
-        protected float _boundingSphereSize = 3.0f;
-        protected float speed;
-        protected Vector3 target;
+        protected float _boundingSphereSize = 5.0f;
         protected Vector3 Color;
 
         public ModelEnemy(float spd, Model model, bool collidable = true)
         {
+            spd *= .75f;
             IsCollidable = collidable;
             if(IsCollidable)
                 CollisionManager.GetInstance(null).AddToCollidables(this);
@@ -24,7 +23,7 @@ namespace GreenChicken
                 effect = new BasicEffect(Game1.GameInstance.GraphicsDevice);
             Random gen = new Random();
             Color = new Vector3((float) gen.NextDouble(), (float) gen.NextDouble(), (float) gen.NextDouble());
-            switch(gen.Next(0,6))
+            switch(gen.Next(0,8))
             {
                 case 0:
                     moveType = MoveType.Static;
@@ -42,6 +41,8 @@ namespace GreenChicken
                     moveType = MoveType.Simple3;
                     break;
                 case 5:
+                case 6:
+                case 7:
                     moveType = MoveType.Follow;
                     break;
             }

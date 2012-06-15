@@ -7,6 +7,7 @@ namespace GreenChicken.States
 {
     public class BeginState : State
     {
+        public String gameMode = "Normal";
         public override void Update(Microsoft.Xna.Framework.GameTime gt)
         {
             Game1.GameInstance.Overlay.Update(gt);
@@ -14,6 +15,27 @@ namespace GreenChicken.States
             if (InputManager.GetInstance(null).KeyPressed(InputManager.GameKeyCodes.ENTER))
             {
                 StateManager.GetInstance(null).ChangeState(StateManager.PlayState);
+            }
+
+            if(InputManager.GetInstance(null).KeyPressed(InputManager.GameKeyCodes.SHOOT_UP))
+            {
+                Game1.GameInstance.difficulty = 200;
+                gameMode = "Easy";
+            }
+            if (InputManager.GetInstance(null).KeyPressed(InputManager.GameKeyCodes.SHOOT_DOWN))
+            {
+                Game1.GameInstance.difficulty = 100;
+                gameMode = "Normal";
+            }
+            if (InputManager.GetInstance(null).KeyPressed(InputManager.GameKeyCodes.SHOOT_LEFT))
+            {
+                Game1.GameInstance.difficulty = 60;
+                gameMode = "Hard";
+            }
+            if (InputManager.GetInstance(null).KeyPressed(InputManager.GameKeyCodes.SHOOT_RIGHT))
+            {
+                Game1.GameInstance.difficulty = 1;
+                gameMode = "Expert";
             }
 
         }

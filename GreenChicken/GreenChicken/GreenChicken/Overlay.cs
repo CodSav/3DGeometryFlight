@@ -56,8 +56,10 @@ namespace GreenChicken
             //This is pretty ugly, but since there isn't really a way to use the states, it's the best I can do
             if (StateManager.CurrentState == StateManager.BeginState)
             {
-                _spriteBatch.DrawString(_titleFont, "Some game or something", new Vector2(_gameBounds.Width / 3f, _gameBounds.Height / 3f), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                _spriteBatch.DrawString(_titleFont, "3D FLIGHT FOLDER", new Vector2(_gameBounds.Width / 3f, _gameBounds.Height / 3f), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
                 _spriteBatch.DrawString(_titleFont, "Press [ENTER] to play!", new Vector2(_gameBounds.Width / 3.5f, _gameBounds.Height / 2f), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                _spriteBatch.DrawString(_titleFont, "Press I for Easy, \nK for Normal, \nJ for Hard and \nL for Expert", new Vector2(_gameBounds.Width / 3f, _gameBounds.Height / 1.5f), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                _spriteBatch.DrawString(_titleFont, "Mode: " + StateManager.BeginState.gameMode, new Vector2(_gameBounds.Width / 3f, _gameBounds.Height / 1.2f), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             }
             else if (StateManager.CurrentState == StateManager.PlayState)
             {

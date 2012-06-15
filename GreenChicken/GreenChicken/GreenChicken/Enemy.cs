@@ -22,6 +22,8 @@ namespace GreenChicken
         protected MoveType moveType = MoveType.Static;
         protected Vector3 random = Vector3.Forward;
         protected int randomCount;
+        protected float speed;
+        protected Vector3 target;
 
         public int Life
         {
@@ -69,6 +71,9 @@ namespace GreenChicken
                         directionSimple3.Z *= -1;
                     break;
                 case MoveType.Follow:
+                    target = Game1.GameInstance.Camera.Following.Position;
+                    var temp = speed*Vector3.Normalize(target - Position);
+                    Position += temp;
                     break;
                 case MoveType.Random:
                     if (randomCount++%100 == 0)
