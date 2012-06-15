@@ -11,6 +11,7 @@ namespace GreenChicken
         private const float PLAYER_SPEED = 2.3f;
         private readonly InputManager _inputManager;
         private MouseState _currentMouseState, _prevMouseState;
+        private Rectangle _gameBounds;
 
         public PlayerModel(bool isCollidable = true)
         {
@@ -18,7 +19,7 @@ namespace GreenChicken
             _inputManager = InputManager.GetInstance();
             LoadPrimitive();
             _prevMouseState = Mouse.GetState();
-            
+            _gameBounds = Game1.GameInstance.GraphicsDevice.Viewport.Bounds;
         }
 
         public override void Update()
@@ -34,11 +35,11 @@ namespace GreenChicken
                 playerPosition += Matrix.CreateFromQuaternion(Rotation).Left*PLAYER_SPEED;
             }
 
-            if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_BACKWARD))
+            if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_BACKWARD) || Mouse.GetState().RightButton == ButtonState.Pressed)
             {
                 playerPosition += Matrix.CreateFromQuaternion(Rotation).Forward*PLAYER_SPEED;
             }
-            else if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_FORWARD))
+            else if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_FORWARD) || Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 playerPosition += Matrix.CreateFromQuaternion(Rotation).Backward*PLAYER_SPEED;
             }
@@ -74,6 +75,26 @@ namespace GreenChicken
 
             float angleX = (_prevMouseState.X - _currentMouseState.X)*0.005f;
             float angleY = (_prevMouseState.Y - _currentMouseState.Y)*0.005f;
+
+            if (_prevMouseState.X <= 0 || _currentMouseState.X <= 0)
+            {
+                angleX = .042f;
+            }
+            else if (_prevMouseState.X >= _gameBounds.Width)
+            {
+                angleX = -.042f;
+            }
+
+
+            if (_prevMouseState.Y <= 0 || _currentMouseState.Y <= 0)
+            {
+                angleY = .042f;
+            }
+            else if (_prevMouseState.Y >= _gameBounds.Height)
+            {
+                angleY = -.042f;
+            }
+
 
             Rotation *= Quaternion.CreateFromAxisAngle(Vector3.Up, angleX);
             Rotation *= Quaternion.CreateFromAxisAngle(Vector3.Left, angleY);
@@ -120,7 +141,7 @@ namespace GreenChicken
 
         public override void CollidesWith(Basic b)
         {
-            if(b.GetType().Name.Contains("Enemy"))
+            if (b.GetType().Name.Contains("Enemy"))
             {
                 CollisionManager.GetInstance(null).RemoveFromCollidables(this);
                 BasicManager.GetInstance(null).RemoveFromBasic(this);

@@ -184,8 +184,7 @@ namespace GreenChicken
         {
             if (_projectileCountdown <= 0)
             {
-                if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_UP)) || Mouse.GetState().MiddleButton == ButtonState.Pressed ||
-                    (Mouse.GetState().RightButton == ButtonState.Pressed))
+                if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_UP)))
                 {
                     BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Backward * PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
@@ -203,7 +202,7 @@ namespace GreenChicken
                     _projectileCountdown = PROJECTILE_DELAY;
                     SoundBank.PlayCue("phasers");
                 }
-                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_RIGHT)) || Mouse.GetState().RightButton == ButtonState.Pressed)
+                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_RIGHT)))
                 {
                     BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Left * PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
