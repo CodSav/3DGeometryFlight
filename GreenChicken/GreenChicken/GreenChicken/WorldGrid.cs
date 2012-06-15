@@ -18,6 +18,10 @@ namespace GreenChicken
 
         #region Overrides of Basic
 
+        public override void CollidesWith(Basic b)
+        {
+        }
+
         public override void Update()
         {
         }

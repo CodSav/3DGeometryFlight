@@ -13,23 +13,35 @@ namespace GreenChicken
         private float _pitchAngle = 0;
         private float _rollAngle = 0;
         private Vector3 _direction;
+        private static int ouch = 0;
         
         public Projectile(Vector3 position, Vector3 direction, float yaw, float pitch, float roll, bool isCollidable = true)
         {
-            World = Matrix.CreateTranslation(position);
+            //World = Matrix.CreateTranslation(position);
             _direction = direction;
             _yawAngle = yaw;
             _pitchAngle = pitch;
             _rollAngle = roll;
+            Position = position;
             IsCollidable = isCollidable;
             LoadPrimitive();
+        }
+
+        public override void CollidesWith(Basic b)
+        {
+            if (b.GetType().Name == "SimpleEnemy")
+            {
+                Console.WriteLine("ouch" + ouch++);
+                //CollisionManager.GetInstance(null).RemoveFromCollidables(this);
+                //BasicManager.GetInstance(null).RemoveFromShots(this);
+            }
         }
 
         public override void Update()
         {
             Rotation *= Quaternion.CreateFromYawPitchRoll(_yawAngle, _pitchAngle, _rollAngle);
 
-            World *= Matrix.CreateTranslation(_direction);
+            Position += _direction;
         }
 
         protected override void CreateVertexArray()
@@ -45,6 +57,11 @@ namespace GreenChicken
             ColorVerts[6] = new VertexPositionColor(new Vector3(0,0,-1), Color.Red);
             ColorVerts[7] = new VertexPositionColor(new Vector3(0,-1,0), Color.Red);
             ColorVerts[8] = new VertexPositionColor(new Vector3(0,0,1), Color.Red);
+        }
+
+        protected override BoundingSphere GetBoundingSphere()
+        {
+            return new BoundingSphere(Position, 1.5f);
         }
     }
 }

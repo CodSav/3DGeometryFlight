@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace GreenChicken
@@ -18,6 +19,8 @@ namespace GreenChicken
         }
     }
 
+
+
     public class CollisionManager : GameComponent
     {
         private static CollisionManager cm;
@@ -35,21 +38,29 @@ namespace GreenChicken
 
         public override void Update(GameTime gameTime)
         {
-            foreach (Basic c in collidables)
+            var collidables2 = (ArrayList)collidables.Clone();
+            var finishedColliding = new ArrayList();
+            foreach (Basic c in collidables2)
             {
                 if(!c.IsCollidable)
                     continue;
-                var collide = new ArrayList();
-                foreach (Basic c2 in collidables)
+                foreach (Basic c2 in collidables2)
                 {
+                    var t = new Tuple<Basic, Basic>(c,c2);
+                    if (finishedColliding.Contains(t))
+                        continue;
+                    finishedColliding.Add(new Tuple<Basic, Basic>(c, c2));
+                    finishedColliding.Add(new Tuple<Basic, Basic>(c2, c));
+
                     if (c == c2 || !c.IsCollidable || !c2.IsCollidable)
                         continue;
-                    if (c.BoundingSphere.Intersects(c2.BoundingSphere))
-                    {
-                        collide.Add(c2);
-                    }
+                    
+                    if (!c.BoundingSphere.Intersects(c2.BoundingSphere)) 
+                        continue;
+
+                    c.CollidesWith(c2);
+                    c2.CollidesWith(c);
                 }
-                c.CollidesWith = collide;
             }
             base.Update(gameTime);
         }

@@ -29,15 +29,18 @@ namespace GreenChicken
         private int PreferredBackBufferWidth = 1920;
         private int PreferredBackBufferHeight = 1200;
 
+        private readonly bool useBloom = false;
+        private readonly bool fullscreen = false;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             GameInstance = this;
-            //graphics.PreferredBackBufferWidth = PreferredBackBufferWidth;
-            //graphics.PreferredBackBufferHeight = PreferredBackBufferHeight;
-            //graphics.IsFullScreen = true;
-
+            if (!fullscreen) return;
+            graphics.PreferredBackBufferWidth = PreferredBackBufferWidth;
+            graphics.PreferredBackBufferHeight = PreferredBackBufferHeight;
+            graphics.IsFullScreen = true;
         }
 
         public Camera Camera { get; set; }
@@ -47,14 +50,17 @@ namespace GreenChicken
             CollisionManager = CollisionManager.GetInstance(this);
             InputManager = InputManager.GetInstance(this);
             BasicManager = BasicManager.GetInstance(this);
-            bloom = new BloomComponent(this);
+            if (useBloom)
+                bloom = new BloomComponent(this);
+            
             Overlay = new Overlay(this);
             Camera = new Camera(this);
 
             Components.Add(InputManager);
             Components.Add(BasicManager);
             Components.Add(CollisionManager);
-            Components.Add(bloom);
+            if (useBloom)
+                Components.Add(bloom);
             Components.Add(Overlay);
             Components.Add(Camera);
 
@@ -99,7 +105,8 @@ namespace GreenChicken
 
         protected override void Draw(GameTime gameTime)
         {
-            bloom.BeginDraw();
+            if(useBloom)
+                bloom.BeginDraw();
             GraphicsDevice.Clear(Color.Black);
             GraphicsDevice.RasterizerState = new RasterizerState {CullMode = CullMode.None};
 
@@ -117,13 +124,13 @@ namespace GreenChicken
             if (_projectileCountdown <= 0)
             {
                 if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_UP)) || Mouse.GetState().MiddleButton == ButtonState.Pressed || 
-                    (Mouse.GetState().RightButton == ButtonState.Pressed && Mouse.GetState().LeftButton == ButtonState.Pressed))
+                    (Mouse.GetState().RightButton == ButtonState.Pressed))
                 {
                     BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Backward*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
                     _soundBank.PlayCue("phasers");
                 }
-                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_LEFT)) || Mouse.GetState().LeftButton == ButtonState.Pressed)
+                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_LEFT)) )
                 {
                     BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Forward*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
