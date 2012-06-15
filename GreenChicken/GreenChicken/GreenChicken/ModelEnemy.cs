@@ -8,7 +8,7 @@ namespace GreenChicken
     {
         public static PlayerModel player;
         private static BasicEffect effect;
-        protected float _boundingSphereSize = 4.0f;
+        protected float _boundingSphereSize = 3.0f;
         protected float speed;
         protected Vector3 target;
         protected Vector3 Color;
@@ -24,6 +24,27 @@ namespace GreenChicken
                 effect = new BasicEffect(Game1.GameInstance.GraphicsDevice);
             Random gen = new Random();
             Color = new Vector3((float) gen.NextDouble(), (float) gen.NextDouble(), (float) gen.NextDouble());
+            switch(gen.Next(0,6))
+            {
+                case 0:
+                    moveType = MoveType.Static;
+                    break;
+                case 1:
+                    moveType = MoveType.Simple2;
+                    break;
+                case 2:
+                    moveType = MoveType.Simple;
+                    break;
+                case 3:
+                    moveType = MoveType.Random;
+                    break;
+                case 4:
+                    moveType = MoveType.Simple3;
+                    break;
+                case 5:
+                    moveType = MoveType.Follow;
+                    break;
+            }
         }
 
         public Model model { get; protected set; }

@@ -13,11 +13,9 @@ namespace GreenChicken
         private float _pitchAngle = 0;
         private float _rollAngle = 0;
         private Vector3 _direction;
-        private static int ouch = 0;
         
         public Projectile(Vector3 position, Vector3 direction, float yaw, float pitch, float roll, bool isCollidable = true)
         {
-            //World = Matrix.CreateTranslation(position);
             _direction = direction;
             _yawAngle = yaw;
             _pitchAngle = pitch;
@@ -31,7 +29,6 @@ namespace GreenChicken
         {
             if (b.GetType().Name == "SimpleEnemy" || b.GetType().Name == "ModelEnemy")
             {
-                Console.WriteLine("ouch" + ouch++);
                 CollisionManager.GetInstance(null).RemoveFromCollidables(this);
                 BasicManager.GetInstance(null).RemoveFromShots(this);
             }
