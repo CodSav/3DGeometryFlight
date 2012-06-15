@@ -22,6 +22,10 @@ namespace GreenChicken
         {
         }
 
+        protected override void Flash()
+        {
+        }
+
         public override void Update()
         {
         }

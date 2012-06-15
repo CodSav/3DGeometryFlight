@@ -10,7 +10,7 @@ namespace GreenChicken
         {
             IsCollidable = isCollidable;
             LoadPrimitive();
-            switch (new Random().Next(0, 6))
+            switch (new Random().Next(0, 5))
             {
                 case 0:
                     moveType = MoveType.Static;
@@ -27,11 +27,6 @@ namespace GreenChicken
                 case 4:
                     moveType = MoveType.Simple3;
                     break;
-                case 5:
-                case 6:
-                case 7:
-                    moveType = MoveType.Follow;
-                    break;
             }
         }
 
@@ -46,6 +41,14 @@ namespace GreenChicken
             ColorVerts[2] = new VertexPositionColor(new Vector3(7, 0, 7), Color.Green);
             ColorVerts[3] = new VertexPositionColor(new Vector3(-4, 4, 0), Color.BlueViolet);
             ColorVerts[4] = new VertexPositionColor(new Vector3(-4, 4, -4), Color.BlueViolet);
+        }
+
+        #endregion
+
+        #region Overrides of Enemy
+
+        protected override void Flash()
+        {
         }
 
         #endregion

@@ -22,6 +22,11 @@ namespace GreenChicken
             _gameBounds = Game1.GameInstance.GraphicsDevice.Viewport.Bounds;
         }
 
+        protected override void Flash()
+        {
+            //throw new NotImplementedException();
+        }
+
         public override void Update()
         {
             _currentMouseState = Mouse.GetState();

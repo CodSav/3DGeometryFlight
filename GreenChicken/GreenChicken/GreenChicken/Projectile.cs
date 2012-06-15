@@ -34,6 +34,11 @@ namespace GreenChicken
             }
         }
 
+        protected override void Flash()
+        {
+            
+        }
+
         public override void Update()
         {
             Rotation *= Quaternion.CreateFromYawPitchRoll(_yawAngle, _pitchAngle, _rollAngle);
@@ -58,7 +63,7 @@ namespace GreenChicken
 
         protected override BoundingSphere GetBoundingSphere()
         {
-            return new BoundingSphere(Position, 1.5f);
+            return new BoundingSphere(Position, 1.85f);
         }
     }
 }

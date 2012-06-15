@@ -10,10 +10,11 @@ namespace GreenChicken
         private static BasicEffect effect;
         protected float _boundingSphereSize = 5.0f;
         protected Vector3 Color;
+        protected bool flash;
 
         public ModelEnemy(float spd, Model model, bool collidable = true)
         {
-            spd *= .75f;
+            spd *= .45f;
             IsCollidable = collidable;
             if(IsCollidable)
                 CollisionManager.GetInstance(null).AddToCollidables(this);
@@ -61,8 +62,11 @@ namespace GreenChicken
             effect.View = camera.View;
             effect.Projection = camera.Projection;
             effect.LightingEnabled = true;
-            
-            effect.EmissiveColor = Color;
+
+            if (!flash)
+                effect.EmissiveColor = Color;
+            else
+                flash = false;
             foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (ModelMeshPart mmp in mesh.MeshParts)
@@ -81,6 +85,16 @@ namespace GreenChicken
         protected override BoundingSphere GetBoundingSphere()
         {
             return new BoundingSphere(Position, _boundingSphereSize);
+        }
+
+        #endregion
+
+        #region Overrides of Enemy
+
+        protected override void Flash()
+        {
+            effect.EmissiveColor = new Vector3(1f,0,0);
+            flash = true;
         }
 
         #endregion

@@ -37,6 +37,7 @@ namespace GreenChicken
             {
                 Game1.GameInstance.SoundBank.PlayCue("enemyShot");
                 Game1.GameInstance.Overlay.IncreaseScore(1);
+                Flash();
                 Life -= 10;
             }
 
@@ -48,6 +49,8 @@ namespace GreenChicken
                 CollisionManager.GetInstance(null).RemoveFromCollidables(this);
             }
         }
+
+        protected abstract void Flash();
 
         public override void Update()
         {
