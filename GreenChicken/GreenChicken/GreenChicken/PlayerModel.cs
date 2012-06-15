@@ -76,21 +76,21 @@ namespace GreenChicken
             float angleX = (_prevMouseState.X - _currentMouseState.X)*0.005f;
             float angleY = (_prevMouseState.Y - _currentMouseState.Y)*0.005f;
 
-            if (_prevMouseState.X <= 0 || _currentMouseState.X <= 0)
+            if (_prevMouseState.X <= 0 && _currentMouseState.X <= 0)
             {
                 angleX = .042f;
             }
-            else if (_prevMouseState.X >= _gameBounds.Width)
+            else if (_prevMouseState.X >= _gameBounds.Width - 1 && _currentMouseState.X >= _gameBounds.Width - 1)
             {
                 angleX = -.042f;
             }
 
 
-            if (_prevMouseState.Y <= 0 || _currentMouseState.Y <= 0)
+            if (_prevMouseState.Y <= 0 && _currentMouseState.Y <= 0)
             {
                 angleY = .042f;
             }
-            else if (_prevMouseState.Y >= _gameBounds.Height)
+            else if (_prevMouseState.Y >= _gameBounds.Height - 1 && _currentMouseState.Y >= _gameBounds.Height - 1)
             {
                 angleY = -.042f;
             }
