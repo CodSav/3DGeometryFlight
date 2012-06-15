@@ -29,7 +29,7 @@ namespace GreenChicken
         private int PreferredBackBufferWidth = 1920;
         private int PreferredBackBufferHeight = 1200;
 
-        private readonly bool useBloom = false;
+        private readonly bool useBloom = true;
         private readonly bool fullscreen = false;
 
         public Game1()
@@ -130,13 +130,13 @@ namespace GreenChicken
                     _projectileCountdown = PROJECTILE_DELAY;
                     _soundBank.PlayCue("phasers");
                 }
-                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_LEFT)) )
+                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_DOWN)) )
                 {
                     BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Forward*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
                     _soundBank.PlayCue("phasers");
                 }
-                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_DOWN)))
+                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_LEFT)))
                 {
                     BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Right*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
