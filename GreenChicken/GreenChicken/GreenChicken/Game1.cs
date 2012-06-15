@@ -18,13 +18,13 @@ namespace GreenChicken
         public BloomComponent bloom;
         public CollisionManager CollisionManager;
 
-        AudioEngine _audioEngine;
-        WaveBank _waveBank;
-        SoundBank _soundBank;
-        Cue _trackCue;
+        public AudioEngine AudioEngine;
+        public WaveBank WaveBank;
+        public SoundBank SoundBank;
+        public Cue TrackCue;
 
-        private const float PROJECTILE_SPEED = 3;
-        private const int PROJECTILE_DELAY = 108;
+        private const float PROJECTILE_SPEED = 8;
+        private const int PROJECTILE_DELAY = 42;
         private int _projectileCountdown;
         private int PreferredBackBufferWidth = 1920;
         private int PreferredBackBufferHeight = 1200;
@@ -34,9 +34,9 @@ namespace GreenChicken
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             GameInstance = this;
-            //graphics.PreferredBackBufferWidth = PreferredBackBufferWidth;
-            //graphics.PreferredBackBufferHeight = PreferredBackBufferHeight;
-            //graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferWidth = PreferredBackBufferWidth;
+            graphics.PreferredBackBufferHeight = PreferredBackBufferHeight;
+            graphics.IsFullScreen = true;
 
         }
 
@@ -63,9 +63,9 @@ namespace GreenChicken
 
         protected override void LoadContent()
         {
-            _audioEngine = new AudioEngine(@"Content\audio\GameAudio.xgs");
-            _waveBank = new WaveBank(_audioEngine, @"Content\audio\Wave Bank.xwb");
-            _soundBank = new SoundBank(_audioEngine, @"Content\audio\Sound Bank.xsb");
+            AudioEngine = new AudioEngine(@"Content\audio\GameAudio.xgs");
+            WaveBank = new WaveBank(AudioEngine, @"Content\audio\Wave Bank.xwb");
+            SoundBank = new SoundBank(AudioEngine, @"Content\audio\Sound Bank.xsb");
 
             var w = new WorldGrid();
             BasicManager.AddBasic(w);
@@ -78,8 +78,8 @@ namespace GreenChicken
 
             Camera.Following = p;
 
-            _trackCue = _soundBank.GetCue("music");
-            _trackCue.Play();
+            TrackCue = SoundBank.GetCue("music");
+            TrackCue.Play();
         }
 
         protected override void UnloadContent()
@@ -90,10 +90,10 @@ namespace GreenChicken
         {
             if (InputManager.KeyPressed(InputManager.GameKeyCodes.QUIT))
                 this.Exit();
-
+            
             FireShots(gameTime);
 
-            _audioEngine.Update();
+            AudioEngine.Update();
             base.Update(gameTime);
         }
 
@@ -121,25 +121,25 @@ namespace GreenChicken
                 {
                     BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Backward*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
-                    _soundBank.PlayCue("phasers");
+                    SoundBank.PlayCue("phasers");
                 }
-                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_LEFT)) || Mouse.GetState().LeftButton == ButtonState.Pressed)
+                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_DOWN)) || Mouse.GetState().LeftButton == ButtonState.Pressed)
                 {
                     BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Forward*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
-                    _soundBank.PlayCue("phasers");
+                    SoundBank.PlayCue("phasers");
                 }
-                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_DOWN)))
+                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_LEFT)))
                 {
                     BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Right*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
-                    _soundBank.PlayCue("phasers");
+                    SoundBank.PlayCue("phasers");
                 }
                 else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_RIGHT)) || Mouse.GetState().RightButton == ButtonState.Pressed)
                 {
                     BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Left*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
-                    _soundBank.PlayCue("phasers");
+                    SoundBank.PlayCue("phasers");
                 }
             }
             else
