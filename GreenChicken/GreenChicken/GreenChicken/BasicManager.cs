@@ -28,6 +28,11 @@ namespace GreenChicken
             base.Initialize();
         }
 
+        public void RemoveFromShots(Basic b)
+        {
+            _shots.Remove(b);
+        }
+
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -84,11 +89,12 @@ namespace GreenChicken
             for (int i = 0; i < _shots.Count; ++i)
             {
                 _shots[i].Update();
-                if (_shots[i].World.Translation.Z < -SHOT_BOUND || _shots[i].World.Translation.Y < -SHOT_BOUND || _shots[i].World.Translation.X < -SHOT_BOUND ||
-                    _shots[i].World.Translation.Z > SHOT_BOUND || _shots[i].World.Translation.Y > SHOT_BOUND || _shots[i].World.Translation.X > SHOT_BOUND)
+                if (_shots[i].Position.Z < -SHOT_BOUND || _shots[i].Position.Y < -SHOT_BOUND || _shots[i].Position.X < -SHOT_BOUND ||
+                    _shots[i].Position.Z > SHOT_BOUND || _shots[i].Position.Y > SHOT_BOUND || _shots[i].Position.X > SHOT_BOUND)
                 {
+                    var s = _shots[i];
                     _shots.RemoveAt(i);
-                    --i;
+                    CollisionManager.GetInstance(null).RemoveFromCollidables(s);
                 }
             }
         }

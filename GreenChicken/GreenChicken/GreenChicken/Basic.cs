@@ -38,9 +38,8 @@ namespace GreenChicken
 
         #region Collision
 
-        //Properties for describing if the object can collide with other objects
-        //and a list of objects it has collided with
-        public ArrayList CollidesWith = new ArrayList();
+        public abstract void CollidesWith(Basic b);
+
         public bool IsCollidable { get; set; }
 
         #endregion

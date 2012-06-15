@@ -18,26 +18,29 @@ namespace GreenChicken
         public BloomComponent bloom;
         public CollisionManager CollisionManager;
 
-        public AudioEngine AudioEngine;
-        public WaveBank WaveBank;
-        public SoundBank SoundBank;
-        public Cue TrackCue;
+        AudioEngine _audioEngine;
+        WaveBank _waveBank;
+        SoundBank _soundBank;
+        Cue _trackCue;
 
-        private const float PROJECTILE_SPEED = 8;
-        private const int PROJECTILE_DELAY = 42;
+        private const float PROJECTILE_SPEED = 3;
+        private const int PROJECTILE_DELAY = 108;
         private int _projectileCountdown;
         private int PreferredBackBufferWidth = 1920;
         private int PreferredBackBufferHeight = 1200;
+
+        private readonly bool useBloom = false;
+        private readonly bool fullscreen = false;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             GameInstance = this;
+            if (!fullscreen) return;
             graphics.PreferredBackBufferWidth = PreferredBackBufferWidth;
             graphics.PreferredBackBufferHeight = PreferredBackBufferHeight;
             graphics.IsFullScreen = true;
-
         }
 
         public Camera Camera { get; set; }
@@ -47,14 +50,17 @@ namespace GreenChicken
             CollisionManager = CollisionManager.GetInstance(this);
             InputManager = InputManager.GetInstance(this);
             BasicManager = BasicManager.GetInstance(this);
-            bloom = new BloomComponent(this);
+            if (useBloom)
+                bloom = new BloomComponent(this);
+            
             Overlay = new Overlay(this);
             Camera = new Camera(this);
 
             Components.Add(InputManager);
             Components.Add(BasicManager);
             Components.Add(CollisionManager);
-            Components.Add(bloom);
+            if (useBloom)
+                Components.Add(bloom);
             Components.Add(Overlay);
             Components.Add(Camera);
 
@@ -63,9 +69,9 @@ namespace GreenChicken
 
         protected override void LoadContent()
         {
-            AudioEngine = new AudioEngine(@"Content\audio\GameAudio.xgs");
-            WaveBank = new WaveBank(AudioEngine, @"Content\audio\Wave Bank.xwb");
-            SoundBank = new SoundBank(AudioEngine, @"Content\audio\Sound Bank.xsb");
+            _audioEngine = new AudioEngine(@"Content\audio\GameAudio.xgs");
+            _waveBank = new WaveBank(_audioEngine, @"Content\audio\Wave Bank.xwb");
+            _soundBank = new SoundBank(_audioEngine, @"Content\audio\Sound Bank.xsb");
 
             var w = new WorldGrid();
             BasicManager.AddBasic(w);
@@ -78,8 +84,8 @@ namespace GreenChicken
 
             Camera.Following = p;
 
-            TrackCue = SoundBank.GetCue("music");
-            TrackCue.Play();
+            _trackCue = _soundBank.GetCue("music");
+            _trackCue.Play();
         }
 
         protected override void UnloadContent()
@@ -90,16 +96,17 @@ namespace GreenChicken
         {
             if (InputManager.KeyPressed(InputManager.GameKeyCodes.QUIT))
                 this.Exit();
-            
+
             FireShots(gameTime);
 
-            AudioEngine.Update();
+            _audioEngine.Update();
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            bloom.BeginDraw();
+            if(useBloom)
+                bloom.BeginDraw();
             GraphicsDevice.Clear(Color.Black);
             GraphicsDevice.RasterizerState = new RasterizerState {CullMode = CullMode.None};
 
@@ -117,29 +124,29 @@ namespace GreenChicken
             if (_projectileCountdown <= 0)
             {
                 if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_UP)) || Mouse.GetState().MiddleButton == ButtonState.Pressed || 
-                    (Mouse.GetState().RightButton == ButtonState.Pressed && Mouse.GetState().LeftButton == ButtonState.Pressed))
+                    (Mouse.GetState().RightButton == ButtonState.Pressed))
                 {
                     BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Backward*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
-                    SoundBank.PlayCue("phasers");
+                    _soundBank.PlayCue("phasers");
                 }
-                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_DOWN)) || Mouse.GetState().LeftButton == ButtonState.Pressed)
+                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_LEFT)) )
                 {
                     BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Forward*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
-                    SoundBank.PlayCue("phasers");
+                    _soundBank.PlayCue("phasers");
                 }
-                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_LEFT)))
+                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_DOWN)))
                 {
                     BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Right*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
-                    SoundBank.PlayCue("phasers");
+                    _soundBank.PlayCue("phasers");
                 }
                 else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_RIGHT)) || Mouse.GetState().RightButton == ButtonState.Pressed)
                 {
                     BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Left*PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
-                    SoundBank.PlayCue("phasers");
+                    _soundBank.PlayCue("phasers");
                 }
             }
             else

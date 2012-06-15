@@ -117,6 +117,11 @@ namespace GreenChicken
             return _world*Matrix.CreateFromQuaternion(Rotation)*Matrix.CreateTranslation(Position);
         }
 
+        public override void CollidesWith(Basic b)
+        {
+            //TODO
+        }
+
         #endregion
     }
 }
