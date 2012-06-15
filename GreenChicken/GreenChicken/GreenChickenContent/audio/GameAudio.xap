@@ -225,6 +225,12 @@ Wave Bank
     Windows Bank Path Edited = 0;
     Seek Tables = 1;
     Compression Preset Name = <none>;
+    Xbox Bank Last Modified Low = 0;
+    Xbox Bank Last Modified High = 0;
+    PC Bank Last Modified Low = 0;
+    PC Bank Last Modified High = 0;
+    Header Last Modified Low = 0;
+    Header Last Modified High = 0;
     Bank Last Revised Low = 3972746197;
     Bank Last Revised High = 30231301;
 
@@ -443,6 +449,8 @@ Sound Bank
     Windows File = Win\Sound Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
+    Header Last Modified High = 0;
+    Header Last Modified Low = 0;
 
     Sound
     {
@@ -684,7 +692,7 @@ Sound Bank
     Sound
     {
         Name = Batman Punch;
-        Volume = -1200;
+        Volume = -790;
         Pitch = 0;
         Priority = 0;
 
@@ -731,7 +739,7 @@ Sound Bank
     Sound
     {
         Name = Sharp Punch;
-        Volume = -1200;
+        Volume = -730;
         Pitch = 0;
         Priority = 0;
 
@@ -778,7 +786,7 @@ Sound Bank
     Sound
     {
         Name = Strong Punch;
-        Volume = -1200;
+        Volume = -790;
         Pitch = 0;
         Priority = 0;
 
