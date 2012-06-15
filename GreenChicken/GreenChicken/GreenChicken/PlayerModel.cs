@@ -7,21 +7,22 @@ namespace GreenChicken
 {
     internal class PlayerModel : BasicPrimitive
     {
-        private const float PLAYER_SPEED = 2f;
+        private const float PLAYER_SPEED = 2.3f;
         private readonly InputManager _inputManager;
-        private MouseState currentMouseState, prevMouseState;
+        private MouseState _currentMouseState, _prevMouseState;
 
         public PlayerModel(bool isCollidable = true)
         {
             IsCollidable = isCollidable;
             _inputManager = InputManager.GetInstance();
             LoadPrimitive();
-            prevMouseState = Mouse.GetState();
+            _prevMouseState = Mouse.GetState();
+            
         }
 
         public override void Update()
         {
-            currentMouseState = Mouse.GetState();
+            _currentMouseState = Mouse.GetState();
             Vector3 playerPosition = Position;
             if (_inputManager.KeyDown(InputManager.GameKeyCodes.MOVE_LEFT))
             {
@@ -70,14 +71,13 @@ namespace GreenChicken
 
             Position = playerPosition;
 
-            //TODO: Handle with InputManager
-            float angleX = (prevMouseState.X - currentMouseState.X)*0.005f;
-            float angleY = (prevMouseState.Y - currentMouseState.Y)*0.005f;
+            float angleX = (_prevMouseState.X - _currentMouseState.X)*0.005f;
+            float angleY = (_prevMouseState.Y - _currentMouseState.Y)*0.005f;
 
             Rotation *= Quaternion.CreateFromAxisAngle(Vector3.Up, angleX);
             Rotation *= Quaternion.CreateFromAxisAngle(Vector3.Left, angleY);
 
-            prevMouseState = currentMouseState;
+            _prevMouseState = _currentMouseState;
         }
 
         #region Overrides of BasicPrimitive

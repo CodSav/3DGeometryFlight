@@ -20,6 +20,7 @@ namespace GreenChicken
 
         public StateManager(Game game) : base(game)
         {
+            current = new PlayState();
         }
 
         public void ChangeState()
