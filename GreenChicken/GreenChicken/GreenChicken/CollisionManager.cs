@@ -46,6 +46,10 @@ namespace GreenChicken
                     continue;
                 foreach (Basic c2 in collidables2)
                 {
+                    if (c.GetType().Name == "Projectile" && c2.GetType().Name == "Projectile")
+                        continue;
+                    if (c.GetType().Name.Contains("Enemy") && c2.GetType().Name.Contains("Enemy"))
+                        continue;
                     var t = new Tuple<Basic, Basic>(c,c2);
                     if (finishedColliding.Contains(t))
                         continue;

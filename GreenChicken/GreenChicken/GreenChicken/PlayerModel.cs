@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -119,7 +120,13 @@ namespace GreenChicken
 
         public override void CollidesWith(Basic b)
         {
-            //TODO
+            if(b.GetType().Name.Contains("Enemy"))
+            {
+                CollisionManager.GetInstance(null).RemoveFromCollidables(this);
+                BasicManager.GetInstance(null).RemoveFromBasic(this);
+                Game1.GameInstance.TrackCue.Stop(AudioStopOptions.Immediate);
+                Game1.GameInstance.SoundBank.PlayCue("die");
+            }
         }
 
         #endregion

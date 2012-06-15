@@ -27,6 +27,8 @@ namespace GreenChicken
         public float BaseIntensity = 0.2f;
         public float BloomSaturation = 1;
         public float BaseSaturation = 0.1f;
+
+        public int toRender = 0; //Desaturate = 1;
         
         // Optionally displays one of the intermediate buffers used
         // by the bloom postprocess, so you can see exactly what is
@@ -44,11 +46,17 @@ namespace GreenChicken
                 throw new ArgumentNullException("game");
         }
 
+        public void Desaturate()
+        {
+            if (BloomSaturation > 0)
+                BloomSaturation -= .01f;
+        }
+
 
         /// <summary>
         /// Load your graphics content.
         /// </summary>
-        protected override void LoadContent()
+        public new void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -117,6 +125,8 @@ namespace GreenChicken
         /// </summary>
         public override void Draw(GameTime gameTime)
         {
+            if(toRender == 1)
+                Desaturate();
             GraphicsDevice.SamplerStates[1] = SamplerState.LinearClamp;
 
             // Pass 1: draw the scene into rendertarget 1, using a

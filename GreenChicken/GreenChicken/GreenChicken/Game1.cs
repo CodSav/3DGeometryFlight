@@ -29,8 +29,8 @@ namespace GreenChicken
         private int PreferredBackBufferWidth = 1920;
         private int PreferredBackBufferHeight = 1200;
 
-        private readonly bool useBloom = true;
-        private readonly bool fullscreen = false;
+        public readonly bool useBloom = true;
+        public readonly bool fullscreen = false;
 
         public Game1()
         {
@@ -52,19 +52,19 @@ namespace GreenChicken
             BasicManager = BasicManager.GetInstance(this);
             if (useBloom)
                 bloom = new BloomComponent(this);
-            
+
             Overlay = new Overlay(this);
             Camera = new Camera(this);
             StateManager = new StateManager(this);
 
             Components.Add(InputManager);
-            Components.Add(BasicManager);
-            Components.Add(CollisionManager);
+            //Components.Add(BasicManager);
+            //Components.Add(CollisionManager);
             Components.Add(StateManager);
-            if (useBloom)
-                Components.Add(bloom);
-            Components.Add(Overlay);
-            Components.Add(Camera);
+            //if (useBloom)
+            //    Components.Add(bloom);
+            //Components.Add(Overlay);
+            //Components.Add(Camera);
 
             base.Initialize();
         }
@@ -78,44 +78,58 @@ namespace GreenChicken
             var w = new WorldGrid();
             BasicManager.AddBasic(w);
 
-            var p = new PlayerModel{Position = new Vector3(0,0,0)};
+            var p = new PlayerModel { Position = new Vector3(0, 0, 0) };
             BasicManager.AddBasic(p);
+
+            var e = new SimpleEnemy { Position = new Vector3(-10, 2, 10) };
+            BasicManager.AddBasic(e);
 
             var e2 = new ModelEnemy(1.0f, Content.Load<Model>(@"Models\Dodeca")) { Position = new Vector3(-100, 2, 10) };
             BasicManager.AddBasic(e2);
-
-            var e = new SimpleEnemy {Position = new Vector3(-10, 2, 10)};
-            BasicManager.AddBasic(e);
 
             Camera.Following = p;
 
             TrackCue = SoundBank.GetCue("music");
             TrackCue.Play();
+            StateManager.StupidLoadContent();
         }
 
         protected override void UnloadContent()
         {
         }
 
+
         protected override void Update(GameTime gameTime)
         {
-            if (InputManager.KeyPressed(InputManager.GameKeyCodes.QUIT))
-                this.Exit();
-
-            FireShots(gameTime);
-
-            AudioEngine.Update();
             base.Update(gameTime);
         }
 
+
         protected override void Draw(GameTime gameTime)
         {
-            if(useBloom)
+            base.Draw(gameTime);
+        }
+
+
+        public void Update2(GameTime gameTime)
+        {
+            if (InputManager.KeyPressed(InputManager.GameKeyCodes.QUIT))
+                this.Exit();
+            
+            FireShots(gameTime);
+
+            AudioEngine.Update();
+            //   base.Update(gameTime);
+        }
+
+        public void Draw2(GameTime gameTime)
+        {
+            if (useBloom)
                 bloom.BeginDraw();
             GraphicsDevice.Clear(Color.Black);
-            GraphicsDevice.RasterizerState = new RasterizerState {CullMode = CullMode.None};
+            GraphicsDevice.RasterizerState = new RasterizerState { CullMode = CullMode.None };
 
-            base.Draw(gameTime);
+            //   base.Draw(gameTime);
         }
 
         public void GetZoneOfPosition(Vector3 position)
@@ -128,28 +142,28 @@ namespace GreenChicken
         {
             if (_projectileCountdown <= 0)
             {
-                if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_UP)) || Mouse.GetState().MiddleButton == ButtonState.Pressed || 
+                if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_UP)) || Mouse.GetState().MiddleButton == ButtonState.Pressed ||
                     (Mouse.GetState().RightButton == ButtonState.Pressed))
                 {
-                    BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Backward*PROJECTILE_SPEED);
+                    BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Backward * PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
                     SoundBank.PlayCue("phasers");
                 }
-                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_DOWN)) )
+                else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_DOWN)))
                 {
-                    BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Forward*PROJECTILE_SPEED);
+                    BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Forward * PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
                     SoundBank.PlayCue("phasers");
                 }
                 else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_LEFT)))
                 {
-                    BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Right*PROJECTILE_SPEED);
+                    BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Right * PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
                     SoundBank.PlayCue("phasers");
                 }
                 else if (InputManager.KeyDown((InputManager.GameKeyCodes.SHOOT_RIGHT)) || Mouse.GetState().RightButton == ButtonState.Pressed)
                 {
-                    BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Left*PROJECTILE_SPEED);
+                    BasicManager.AddShot(Camera.Following.Position, Matrix.CreateFromQuaternion(Camera.Following.Rotation).Left * PROJECTILE_SPEED);
                     _projectileCountdown = PROJECTILE_DELAY;
                     SoundBank.PlayCue("phasers");
                 }
