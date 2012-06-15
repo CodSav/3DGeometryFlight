@@ -225,8 +225,8 @@ Wave Bank
     Windows Bank Path Edited = 0;
     Seek Tables = 1;
     Compression Preset Name = <none>;
-    Bank Last Revised Low = 3781855644;
-    Bank Last Revised High = 30231272;
+    Bank Last Revised Low = 1630236878;
+    Bank Last Revised High = 30231299;
 
     Wave
     {
@@ -345,24 +345,70 @@ Wave Bank
 
     Wave
     {
-        Name = die1;
-        File = die1.wav;
-        Build Settings Last Modified Low = 2580649238;
-        Build Settings Last Modified High = 30231272;
+        Name = Batman Punch;
+        File = Batman Punch.wav;
+        Build Settings Last Modified Low = 1519630551;
+        Build Settings Last Modified High = 30231299;
 
         Cache
         {
             Format Tag = 0;
-            Channels = 1;
-            Sampling Rate = 32000;
+            Channels = 2;
+            Sampling Rate = 44100;
             Bits Per Sample = 1;
             Play Region Offset = 44;
-            Play Region Length = 106596;
+            Play Region Length = 882000;
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 851973962;
-            Last Modified High = 30231271;
+            Last Modified Low = 1327689573;
+            Last Modified High = 30231299;
+        }
+    }
+
+    Wave
+    {
+        Name = Sharp Punch;
+        File = Sharp Punch.wav;
+        Build Settings Last Modified Low = 1519630551;
+        Build Settings Last Modified High = 30231299;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 44;
+            Play Region Length = 882000;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 1328889641;
+            Last Modified High = 30231299;
+        }
+    }
+
+    Wave
+    {
+        Name = Strong Punch;
+        File = Strong Punch.wav;
+        Build Settings Last Modified Low = 1519640552;
+        Build Settings Last Modified High = 30231299;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 48000;
+            Bits Per Sample = 1;
+            Play Region Offset = 44;
+            Play Region Length = 192240;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 1329129655;
+            Last Modified High = 30231299;
         }
     }
 }
@@ -614,7 +660,7 @@ Sound Bank
 
     Sound
     {
-        Name = die;
+        Name = Batman Punch;
         Volume = -1200;
         Pitch = 0;
         Priority = 0;
@@ -650,8 +696,102 @@ Sound Bank
                 {
                     Bank Name = Wave Bank;
                     Bank Index = 0;
-                    Entry Name = die1;
+                    Entry Name = Batman Punch;
                     Entry Index = 5;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
+    Sound
+    {
+        Name = Sharp Punch;
+        Volume = -1200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = Wave Bank;
+                    Bank Index = 0;
+                    Entry Name = Sharp Punch;
+                    Entry Index = 6;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
+    Sound
+    {
+        Name = Strong Punch;
+        Volume = -1200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = Wave Bank;
+                    Bank Index = 0;
+                    Entry Name = Strong Punch;
+                    Entry Index = 7;
                     Weight = 255;
                     Weight Min = 0;
                 }
@@ -750,7 +890,7 @@ Sound Bank
 
     Cue
     {
-        Name = die;
+        Name = enemyShot;
 
         Variation
         {
@@ -761,8 +901,24 @@ Sound Bank
 
         Sound Entry
         {
-            Name = die;
+            Name = Batman Punch;
             Index = 5;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+
+        Sound Entry
+        {
+            Name = Sharp Punch;
+            Index = 6;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+
+        Sound Entry
+        {
+            Name = Strong Punch;
+            Index = 7;
             Weight Min = 0;
             Weight Max = 255;
         }
